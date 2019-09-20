@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+
+import Collections from './views/Collections.vue'
+import Shop from './views/Shop.vue'
+import NewCollection from './views/NewCollection.vue'
+import Bag from './views/Bag.vue'
+import SignIn from './views/SignIn.vue'
 
 Vue.use(Router)
 
@@ -10,16 +15,29 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'collections',
+      component: Collections,
+      alias: '/#'
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/catalog',
+      name: 'shop',
+      component: Shop
+    },
+    {
+      path: '/new_collection',
+      name: 'newCollection',
+      component: NewCollection
+    },
+    {
+      path: '/buy_cart',
+      name: 'bag',
+      component: Bag
+    },
+    {
+      path: '/registration',
+      name: 'signIn',
+      component: SignIn
     }
   ]
 })
