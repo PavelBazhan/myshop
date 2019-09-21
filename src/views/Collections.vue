@@ -59,12 +59,6 @@ import InstaShop from '../components/InstaShop.vue'
 
 export default {
   methods: {
-    shlo () {
-      console.log(this.$store.state.collections.collections[0].backgroundImage)
-    },
-    qwer (qw) {
-      console.log(qw)
-    }
   },
   computed: {
     collection_block_item () {
@@ -143,23 +137,7 @@ export default {
     color: black;
   }
 
-  .collection_block .item button:before {
-    content: "";
-    display: block;
-    width: 18vw;
-    height: 18vw;
-    position: absolute;
-    left: -0.5vw;
-    top: 6vh;
-    border-radius: 50%;
-    background: white;
-    z-index: -1;
-    transition: transform 0.3s;
-  }
 
-  .collection_block .item button:hover:before {
-    transform: translateY(calc(-3vh - 9vw));
-  }
 
   .collection_block .extra-images {
     display: flex;
@@ -229,6 +207,24 @@ export default {
       right: 8vw;
       left: auto;
       bottom: 12vh;
+    }
+
+    .collection_block .item button:before {
+      content: "";
+      display: block;
+      width: 18vw;
+      height: 18vw;
+      position: absolute;
+      left: -0.5vw;
+      top: 6vh;
+      border-radius: 50%;
+      background: white;
+      z-index: -1;
+      transition: transform 0.3s;
+    }
+
+    .collection_block .item button:hover:before {
+      transform: translateY(calc(-3vh - 9vw));
     }
   }
 

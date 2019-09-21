@@ -120,7 +120,8 @@ export default {
 
 .signup_block {
   text-align: center;
-  margin-bottom: 2.5vw;
+  margin-bottom: 10vw;
+  margin-top: 3vw;
 }
 
 .signup_block form {
@@ -149,7 +150,6 @@ export default {
   position: absolute;
   height: 100%;
   right: 0;
-  padding: 0 2%;
   border: none;
   background: transparent;
   font-weight: bold;
@@ -259,7 +259,5 @@ export default {
     padding: 0;
     margin: 0;
   }
-
-
 }
 </style>

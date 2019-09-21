@@ -368,6 +368,10 @@ nav.white_nav .navi a.bag li {
     height: 15vw;
   }
 
+  nav.white_nav {
+    border-bottom: 1px solid #aaa;
+  }
+
   nav .menu .navi a.hamburger {
     display: block;
   }
