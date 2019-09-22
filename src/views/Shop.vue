@@ -3,16 +3,17 @@
     <div class="shop_wrap">
       <app-filters></app-filters>
       <div class="goods_wrap">
+
         <div class="location">
-          <span>Catalog</span>
+          <span @click="qwer">Catalog</span>
           <span>></span>
           <span>Something</span>
         </div>
-        <div class="goods">
 
-          <div class="item" v-for="item in shop_goods">
+        <div class="goods" v-if="filteredGoods.length > 0">
+          <div class="item" v-for="item in filteredGoods">
             <router-link tag="a" :to="`/catalog/${item.category.toLowerCase()}/${item.id}`">
-              <img :src="`./images/shop/${ item.imagesByColor[0][0] }`" alt="">
+              <img :src="`/images/shop/${ item.imagesByColor[0][0] }`" alt="">
             </router-link>
 
             <div class="item_info">
@@ -22,11 +23,15 @@
                   {{ item.name }}
                 </router-link>
               </span>
-              <span class="price" @click="qwer">$ {{ item.priceDollar }}</span>
+              <span class="price">$ {{ item.priceDollar }}</span>
             </div>
           </div>
-
         </div>
+
+        <div class="nothing" v-else>
+          Nothing found for this request.
+        </div>
+
       </div>
     </div>
   </section>
@@ -38,15 +43,41 @@ import Filters from '../components/Filters.vue'
 export default {
   methods: {
     qwer () {
-      console.log(this.$store.state.shop.goods[0].imagesByColor['pink'])
+      console.log(this.$route.query)
+      console.log(this.$route.path)
     }
   },
   components: {
     appFilters: Filters
   },
   computed: {
-    shop_goods () {
+    shopGoods () {
       return this.$store.state.shop.goods
+    },
+    filteredGoods () {
+
+      let output = this.shopGoods.filter((item) => {
+        if (!this.$route.params.category) {
+          return true
+        }
+        let routCategory = this.$route.params.category;
+        return item.category == this.$route.params.category
+      })
+
+      output = output.filter((item) => {
+        let tempArray = ['xl']
+
+        for (let i = 0; i < tempArray.length; i++) {
+          if (item.sizes.indexOf(tempArray[i]) !== -1) {
+            return true
+          }
+        }
+
+
+        return false
+      })
+
+      return output
     }
   }
 }
@@ -132,6 +163,14 @@ export default {
 
 .shop_wrap .goods .item .item_info .price {
   font-weight: bold;
+}
+
+.shop_wrap .nothing {
+  width: 100%;
+  font-size: 2em;
+  line-height: 6em;
+  height: 6em;
+  text-align: center;
 }
 
 @media screen and (min-width: 601px) {

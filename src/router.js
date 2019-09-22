@@ -25,6 +25,11 @@ export default new Router({
       component: Shop
     },
     {
+      path: '/catalog/:category',
+      name: 'shopCateg',
+      component: Shop
+    },
+    {
       path: '/new_collection',
       name: 'newCollection',
       component: NewCollection
@@ -38,6 +43,10 @@ export default new Router({
       path: '/registration',
       name: 'signIn',
       component: SignIn
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })

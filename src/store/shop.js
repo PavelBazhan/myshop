@@ -1,12 +1,14 @@
 export default {
   state: {
+    newCollection: "VINTAGE INSPIRED",
     goods: [
       {
         name: "Cropped parka with faux fur hood trim",
-        category: "Coats",
+        category: "coats",
         collection: "VINTAGE INSPIRED",
         priceDollar: 80,
         colors: [ "pink", "black" ],
+        sizes: ['xs', 's', 'm', 'l'],
         id: 11534 ,
         imagesByColor: [
           [ "11534_pink_0.jpg", "11534_pink_1.jpg" ],
@@ -16,10 +18,11 @@ export default {
       },
       {
         name: "Wool coat with belt",
-        category: "Coats",
+        category: "coats",
         collection: "",
         priceDollar: 70,
-        color: [ "gray", "camel", "black" ],
+        colors: [ "gray", "camel", "black" ],
+        sizes: ['xs', 's', 'm', 'l'],
         id: 11720 ,
         imagesByColor: [
           [ "11720_gray_0.jpg", "11720_gray_1.jpg" ],
@@ -29,10 +32,11 @@ export default {
       },
       {
         name: "Long belted coat",
-        category: "Coats",
+        category: "coats",
         collection: "VINTAGE INSPIRED",
         priceDollar: 80,
-        color: [ "stone", "brown" ],
+        colors: [ "stone", "brown" ],
+        sizes: ['xs', 's', 'm', 'l'],
         id: 11933 ,
         imagesByColor: [
           [ "11933_stone_0.jpg", "11933_stone_1.jpg" ],
@@ -42,10 +46,11 @@ export default {
       },
       {
         name: "Short floral dress",
-        category: "Dresses",
+        category: "dresses",
         collection: "SUSTAINABLE DENIM",
         priceDollar: 60,
-        color: [ "black" ],
+        colors: [ "black" ],
+        sizes: ['xs', 's', 'm', 'xl'],
         id: 11534 ,
         imagesByColor: [
           [ "12001_black_0.jpg", "12001_black_1.jpg" ]
@@ -54,10 +59,11 @@ export default {
       },
       {
         name: "Metallic thread dress",
-        category: "Dresses",
+        category: "dresses",
         collection: "PRAY FOR ROCK",
         priceDollar: 50,
-        color: [ "Fuchsia" ],
+        colors: [ "Fuchsia" ],
+        sizes: ['l', 'xl'],
         id: 12002 ,
         imagesByColor: [
           [ "12002_fuchsia_0.jpg", "12002_fuchsia_1.jpg" ]
@@ -66,18 +72,24 @@ export default {
       }
     ],
     categories: [
-      "TOPS",
-      "TEES AND TANKS",
-      "SHIRTS",
-      "DRESSES",
-      "KNITWEAR",
-      "JUMPSUITS",
-      "BOTTOMS",
-      "INTIMATES",
-      "SHORTS",
-      "JEANS",
-      "SKIRTS",
-      "SHOP ALL"
+      "tops",
+      "coats",
+      "dresses",
+      "tees_and_tanks",
+      "shirts",
+      "knitwear",
+      "jumpsuits",
+      "bottoms",
+      "intimates",
+      "shorts",
+      "jeans",
+      "skirts"
+    ],
+    filters: {
+      size: ['xs', 's', 'm', 'l', 'xl']
+    },
+    sizeChecked: [
+      
     ]
   },
   mutations: {
