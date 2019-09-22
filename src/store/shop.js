@@ -8,7 +8,7 @@ export default {
         collection: "VINTAGE INSPIRED",
         priceDollar: 80,
         colors: [ "pink", "black" ],
-        sizes: ['xs', 's', 'm', 'l'],
+        sizes: ['xs'],
         id: 11534 ,
         imagesByColor: [
           [ "11534_pink_0.jpg", "11534_pink_1.jpg" ],
@@ -22,7 +22,7 @@ export default {
         collection: "",
         priceDollar: 70,
         colors: [ "gray", "camel", "black" ],
-        sizes: ['xs', 's', 'm', 'l'],
+        sizes: ['s'],
         id: 11720 ,
         imagesByColor: [
           [ "11720_gray_0.jpg", "11720_gray_1.jpg" ],
@@ -36,7 +36,7 @@ export default {
         collection: "VINTAGE INSPIRED",
         priceDollar: 80,
         colors: [ "stone", "brown" ],
-        sizes: ['xs', 's', 'm', 'l'],
+        sizes: ['m'],
         id: 11933 ,
         imagesByColor: [
           [ "11933_stone_0.jpg", "11933_stone_1.jpg" ],
@@ -88,12 +88,16 @@ export default {
     filters: {
       size: ['xs', 's', 'm', 'l', 'xl']
     },
-    sizeChecked: [
-      
-    ]
+    sizeChecked: [],
+    newCollectionShowed: false
   },
   mutations: {
-
+    updateSizeChecked(state, value) {
+      state.sizeChecked = value;
+    },
+    updateNewCollectionShowed(state, value) {
+      state.newCollectionShowed = value;
+    },
   },
   actions: {
 

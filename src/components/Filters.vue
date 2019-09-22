@@ -1,9 +1,19 @@
 <template>
   <aside id="filters">
     <div class="title">
-      <span>CATEGORIES</span>
+      <span @click="qwer">CATEGORIES</span>
     </div>
     <ul class="categ_list">
+      <li>
+        <router-link
+          tag="a"
+          :to="{ name: $route.name, params: $route.params, query: newCollectionUrl }"
+          active-class="category_active"
+          exact
+        >
+          <span>new</span>
+        </router-link>
+      </li>
       <li v-for="(category, ind) in categoriesList">
         <!-- <router-link tag="a" :to="getEqualUrl(category)" active-class="category_active" exact> -->
         <router-link
@@ -18,7 +28,7 @@
       <li>
         <router-link
           tag="a"
-          :to="{name: 'shop'}"
+          :to="{name: 'shop', query: $route.query }"
           active-class="category_active"
           exact
         >
@@ -45,6 +55,11 @@
         </ul>
       </li>
 
+      <li>
+        <span>Price</span>
+        <input type="range" min="0" max="100">
+      </li>
+
     </ul>
 
     <div class="title">
@@ -62,20 +77,74 @@
 export default {
   data () {
     return {
-      sizeChecked: []
+      // sizeChecked: []
     }
   },
   computed: {
+    nextUrl () {
+      console.log(this.sizeChecked)
+      return 'asd'
+    },
+
     categoriesList () {
       return this.$store.state.shop.categories
     },
     sizesList () {
       return this.$store.state.shop.filters.size
+    },
+    newCollectionUrl () {
+      let newUrl = {}
+      if (this.$route.query.nc === undefined) {
+        for (let key in this.$route.query) {
+          newUrl[key] = this.$route.query[key]
+        }
+        newUrl.nc = null
+      } else {
+        delete newUrl.nc
+      }
+      return newUrl
+    },
+
+    sizeChecked: {
+      get () {
+        return this.$store.state.shop.sizeChecked
+      },
+      set (value) {
+        this.$store.commit('updateSizeChecked', value)
+      }
+    },
+
+    newCollectionShowed: {
+      get () {
+        return this.$store.state.shop.newCollectionShowed
+      },
+      set (value) {
+        this.$store.commit('updateNewCollectionShowed', value)
+      }
     }
   },
   methods: {
     qwer () {
-      console.log(this.sizeChecked)
+      console.log(this.$route.query)
+      console.log(this.$route.query.nc)
+    },
+    updateRoute () {
+      let newUrl = {}
+      for (let key in this.$route.query) {
+        newUrl[key] = this.$route.query[key]
+      }
+
+      if (this.sizeChecked.length > 0) {
+        newUrl.size = this.sizeChecked.join(',')
+      } else {
+        delete newUrl.size
+      }
+      console.log(newUrl)
+
+      this.$router.push({
+        name: this.$route.name,
+        params: this.$route.params,
+        query: newUrl }).catch(err => {})
     }
   },
   watch: {
@@ -84,20 +153,16 @@ export default {
         if (this.$route.query.size) {
           this.sizeChecked = this.$route.query.size.split(',');
         }
-        console.log('ddd')
+        if (this.$route.query.nc !== undefined) {
+          this.newCollectionShowed = false;
+        }
+        console.log('tru')
       },
       deep: true,
       immediate: true
     },
     sizeChecked () {
-      let newPath
-      if (this.sizeChecked.length > 0) {
-        newPath = this.$route.path + '?size=' + this.sizeChecked.join(',')
-      } else {
-        newPath = this.$route.path
-      }
-      this.$router.push(newPath).catch(err => {})
-      console.log('array updated')
+      this.updateRoute()
     }
   }
 }

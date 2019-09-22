@@ -54,6 +54,9 @@ export default {
     shopGoods () {
       return this.$store.state.shop.goods
     },
+    sizeChecked () {
+      return this.$store.state.shop.sizeChecked
+    },
     filteredGoods () {
 
       let output = this.shopGoods.filter((item) => {
@@ -65,15 +68,12 @@ export default {
       })
 
       output = output.filter((item) => {
-        let tempArray = ['xl']
-
+        let tempArray = this.sizeChecked.length > 0 ? this.sizeChecked : ['xs', 's', 'm', 'l', 'xl']
         for (let i = 0; i < tempArray.length; i++) {
           if (item.sizes.indexOf(tempArray[i]) !== -1) {
             return true
           }
         }
-
-
         return false
       })
 
