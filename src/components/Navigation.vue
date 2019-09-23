@@ -19,7 +19,7 @@
           </li>
         </router-link>
         <router-link tag="a" to="/catalog" active-class="menu_active">
-          <li>
+          <li @click="clearFilter">
             <span>SHOP</span>
           </li>
         </router-link>
@@ -101,6 +101,10 @@ export default {
   methods: {
     switchDropDownMenu () {
       this.dropDownMenuIsOpened = !this.dropDownMenuIsOpened
+    },
+    clearFilter () {
+      console.log('clear')
+      this.$store.commit('clearFilter')
     }
   },
   computed: {

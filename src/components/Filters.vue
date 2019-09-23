@@ -1,73 +1,94 @@
 <template>
   <aside id="filters">
-    <div class="title">
-      <span @click="qwer">CATEGORIES</span>
+    <div class="refine" :class="{refOpened: refineOpened, refClosed: !refineOpened}" @click="switchRefine">
+      <span>REFINE ITEMS</span>
     </div>
-    <ul class="categ_list">
-      <li>
-        <router-link
-          tag="a"
-          :to="{ name: $route.name, params: $route.params, query: newCollectionUrl }"
-          active-class="category_active"
-          exact
-        >
-          <span>new</span>
-        </router-link>
-      </li>
-      <li v-for="(category, ind) in categoriesList">
-        <!-- <router-link tag="a" :to="getEqualUrl(category)" active-class="category_active" exact> -->
-        <router-link
-          tag="a"
-          :to="{ name: 'shopCateg', params: {category: category}, query: $route.query }"
-          active-class="category_active"
-          exact
-        >
-          <span>{{ category.replace(/_/g, " " ) }}</span>
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          tag="a"
-          :to="{name: 'shop', query: $route.query }"
-          active-class="category_active"
-          exact
-        >
-          <span>shop all</span>
-        </router-link>
-      </li>
-    </ul>
 
-    <div class="title">
-      <span>FILTER</span>
+    <div class="filter_wrap">
+      <div class="title" :class="{fOpened: categoriesOpened, fClosed: !categoriesOpened}" @click="switchFilter('category')">
+        <span @click="qwer">CATEGORIES</span>
+      </div>
+      <ul class="categ_list">
+        <li>
+          <router-link
+            tag="a"
+            :to="{ name: $route.name, params: $route.params, query: newCollectionUrl }"
+            :style="{ textDecoration: $route.query.nc !== undefined ? 'underline' : 'none' }"
+            exact
+          >
+            <span>new collection</span>
+          </router-link>
+        </li>
+
+        <li v-for="(category, ind) in categoriesList">
+          <router-link
+            tag="a"
+            :to="{ name: 'shopCateg', params: {category: category}, query: $route.query }"
+            active-class="category_active"
+            exact
+          >
+            <span>{{ category.replace(/_/g, " " ) }}</span>
+          </router-link>
+        </li>
+
+        <li>
+          <router-link
+            tag="a"
+            :to="{name: 'shop', query: $route.query }"
+            active-class="category_active"
+            exact
+          >
+            <span>shop all</span>
+          </router-link>
+        </li>
+      </ul>
+
+      <div class="title" :class="{fOpened: filterOpened, fClosed: !filterOpened}" @click="switchFilter('filter')">
+        <span>FILTER</span>
+      </div>
+      <ul class="filter_list">
+        <li>
+          <span>Size</span>
+          <ul class="check_wrap">
+
+            <li class="check" v-for="size in sizesList">
+              <label>
+                <input checked type="checkbox" name="size" :value="size" v-model="sizeChecked">
+                <span>{{ size }}</span>
+              </label>
+            </li>
+
+          </ul>
+        </li>
+
+        <li>
+          <span>Price</span>
+          <div class="range">
+            <div class="range_block">
+              <span>from</span>
+              <input type="range" step="5" :min="priceFrom" :max="priceTo" v-model.number="currentPriceFrom">
+              <input type="text" maxlength="4" v-model.number.lazy="currentPriceFrom">
+            </div>
+            <div class="range_block">
+              <span>to</span>
+              <input type="range" step="5" :min="priceFrom" :max="priceTo" v-model.number="currentPriceTo">
+              <input type="text" maxlength="4" v-model.number.lazy="currentPriceTo">
+            </div>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="title">
+        <span>SORT</span>
+      </div>
+      <ul class="sort_list">
+        <li>Price ⏶</li>
+        <li>Price ⏷</li>
+      </ul>
     </div>
-    <ul class="filter_list">
-      <li>
-        <span>Size</span>
-        <ul class="check_wrap">
 
-          <li class="check" v-for="size in sizesList">
-            <label>
-              <input checked type="checkbox" name="size" :value="size" v-model="sizeChecked">
-              <span>{{ size }}</span>
-            </label>
-          </li>
 
-        </ul>
-      </li>
-
-      <li>
-        <span>Price</span>
-        <input type="range" min="0" max="100">
-      </li>
-
-    </ul>
-
-    <div class="title">
-      <span>SORT</span>
-    </div>
-    <ul class="sort_list">
-
-    </ul>
 
   </aside>
 </template>
@@ -77,7 +98,9 @@
 export default {
   data () {
     return {
-      // sizeChecked: []
+      categoriesOpened: false,
+      filterOpened: false,
+      refineOpened: false
     }
   },
   computed: {
@@ -85,19 +108,24 @@ export default {
       console.log(this.sizeChecked)
       return 'asd'
     },
-
     categoriesList () {
       return this.$store.state.shop.categories
     },
     sizesList () {
       return this.$store.state.shop.filters.size
     },
+    priceFrom () {
+      return this.$store.getters.priceFrom
+    },
+    priceTo () {
+      return this.$store.getters.priceTo
+    },
     newCollectionUrl () {
       let newUrl = {}
+      for (let key in this.$route.query) {
+        newUrl[key] = this.$route.query[key]
+      }
       if (this.$route.query.nc === undefined) {
-        for (let key in this.$route.query) {
-          newUrl[key] = this.$route.query[key]
-        }
         newUrl.nc = null
       } else {
         delete newUrl.nc
@@ -113,7 +141,6 @@ export default {
         this.$store.commit('updateSizeChecked', value)
       }
     },
-
     newCollectionShowed: {
       get () {
         return this.$store.state.shop.newCollectionShowed
@@ -121,14 +148,42 @@ export default {
       set (value) {
         this.$store.commit('updateNewCollectionShowed', value)
       }
+    },
+    currentPriceFrom: {
+      get () {
+        return this.$store.state.shop.currentPriceFrom
+      },
+      set (value) {
+        this.$store.commit('updateCurrentPriceFrom', value)
+      }
+    },
+    currentPriceTo: {
+      get () {
+        return this.$store.state.shop.currentPriceTo
+      },
+      set (value) {
+        this.$store.commit('updateCurrentPriceTo', value)
+      }
     }
   },
   methods: {
+    switchRefine () {
+      this.refineOpened = !this.refineOpened
+    },
+    switchFilter(filter) {
+      if (filter == 'category') {
+        this.categoriesOpened = !this.categoriesOpened
+      }
+      if (filter == 'filter') {
+        this.filterOpened = !this.filterOpened
+      }
+    },
     qwer () {
-      console.log(this.$route.query)
-      console.log(this.$route.query.nc)
+      console.log(this.currentPriceFrom)
+      console.log(this.priceFrom)
     },
     updateRoute () {
+      // console.log('update route')
       let newUrl = {}
       for (let key in this.$route.query) {
         newUrl[key] = this.$route.query[key]
@@ -139,7 +194,12 @@ export default {
       } else {
         delete newUrl.size
       }
-      console.log(newUrl)
+
+      if ((this.currentPriceFrom > this.priceFrom) || (this.currentPriceTo < this.priceTo)) {
+        newUrl.priceRange = this.currentPriceFrom + ',' + this.currentPriceTo
+      } else {
+        delete newUrl.priceRange
+      }
 
       this.$router.push({
         name: this.$route.name,
@@ -154,16 +214,36 @@ export default {
           this.sizeChecked = this.$route.query.size.split(',');
         }
         if (this.$route.query.nc !== undefined) {
-          this.newCollectionShowed = false;
+          this.newCollectionShowed = true
+        } else {
+          this.newCollectionShowed = false
         }
-        console.log('tru')
+        if (this.$route.query.priceRange) {
+          // priceRange !!!
+        }
       },
       deep: true,
       immediate: true
     },
     sizeChecked () {
       this.updateRoute()
+    },
+    currentPriceFrom () {
+      if (this.currentPriceFrom > this.currentPriceTo) {
+        this.currentPriceTo = this.currentPriceFrom
+      }
+      this.updateRoute()
+    },
+    currentPriceTo () {
+      if (this.currentPriceTo < this.currentPriceFrom) {
+        this.currentPriceFrom = this.currentPriceTo
+      }
+      this.updateRoute()
     }
+  },
+  mounted () {
+    this.currentPriceFrom = this.priceFrom
+    this.currentPriceTo = this.priceTo
   }
 }
 </script>
@@ -173,7 +253,11 @@ export default {
     width: 28%;
   }
 
-  #filters ul {
+  #filters .refine {
+    display:none;
+  }
+
+  ul {
     margin-bottom: 1em;
     margin-top: 0;
     margin-left: 0;
@@ -213,7 +297,6 @@ export default {
   }
 
   .filter_list .check_wrap .check {
-    /* text-align: center; */
     margin-right: 0.5em;
   }
 
@@ -260,9 +343,193 @@ export default {
     background: black;
   }
 
+  .range_block {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  }
+
+  .range_block span {
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    margin-right: 1em;
+
+  }
+
+  .range_block input[type=range] {
+    min-width: 3em;
+    /* width: 10em; */
+    margin-right: 1em;
+  }
+
+  .range_block input[type=text] {
+    max-width: 3.5em;
+    font-size: 1.5em;
+    text-align: center;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    outline: none;
+  }
+
   @media screen and (max-width: 600px) {
     #filters {
       width: 100%;
+      margin-bottom: 1em;
     }
+
+    #filters .refine {
+      height: 15vw;
+      line-height: 15vw;
+      display: block;
+      border-bottom: 1px dashed #D8D8D8;
+    }
+
+    #filters .refine.refClosed span:before {
+      content: "+ ";
+      display: inline-block;
+      width: 1em;
+    }
+
+    #filters .refine.refOpened span:before {
+      content: "- ";
+      display: inline-block;
+      width: 1em;
+    }
+
+    .refine.refClosed + .filter_wrap {
+      height: 0;
+      overflow: hidden;
+    }
+
+    .refine.refOpened + .filter_wrap {
+      height: auto;
+      overflow: hidden;
+    }
+
+    .filter_wrap {
+      transition: height 0.5s ease;
+
+      font-size: 0.8em;
+    }
+
+    .filter_wrap > ul {
+      border-bottom: 1px dashed #D8D8D8;
+      margin-bottom: 0;
+      padding-bottom: 1em;
+    }
+
+    .title {
+      font-weight: normal;
+    }
+
+    .title.fClosed span:before {
+      content: "+ ";
+      display: inline-block;
+      width: 1em;
+    }
+
+    .title.fOpened span:before {
+      content: "- ";
+      display: inline-block;
+      width: 1em;
+    }
+
+    .title.fClosed + .categ_list {
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .title.fOpened + .categ_list {
+      height: auto;
+      overflow: hidden;
+    }
+
+    .categ_list {
+      display: flex;
+      flex-flow: row wrap;
+      padding-left: 1em;
+    }
+
+    .categ_list li {
+      display: block;
+      height: 2em;
+      margin-right: 2em;
+    }
+
+    .title.fClosed + .filter_list {
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .title.fOpened + .filter_list {
+      height: auto;
+      overflow: hidden;
+    }
+
+    .filter_list {
+      padding-left: 1em;
+    }
+
+    .filter_list .check_wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .filter_list .check_wrap .check span {
+      font-size: 1em;
+      width: 2em;
+      position: relative;
+      height: 2em;
+      text-transform: uppercase;
+    }
+
+    .filter_list .check_wrap .check span:hover {
+      cursor: pointer;
+    }
+
+    .filter_list .check_wrap .check span:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1.4em;
+      height: 1.4em;
+      background: transparent;
+      border: 4px solid white;
+      top: 1.4em;
+    }
+
+    .filter_list .check_wrap .check span:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1.4em;
+      height: 1.4em;
+      border: 2px solid black;
+      top: 1.4em;
+    }
+
+    .range_block {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+    }
+
+    .filter_list .check_wrap .check span {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-box-align: start;
+    }
+
+
+
+
+
   }
 </style>

@@ -77,6 +77,27 @@ export default {
         return false
       })
 
+      output = output.filter((item) => {
+        if (!this.$store.state.shop.newCollectionShowed) {
+          return true
+        }
+        if (item.collection === this.$store.state.shop.newCollection) {
+          return true
+        }
+        return false
+      })
+
+      output = output.filter((item) => {
+        let min = this.$store.state.shop.currentPriceFrom
+        let max = this.$store.state.shop.currentPriceTo
+        if ((typeof  min == 'number') &&(typeof  max == 'number')) {
+          if ((item.priceDollar >= min) && (item.priceDollar <= max)) {
+            return true
+          }
+        } else {
+          return true
+        }
+      })
       return output
     }
   }
@@ -179,7 +200,7 @@ export default {
 
 @media screen and (max-width: 600px) {
   #shop {
-    padding-top: 20vw;
+    padding-top: 15vw;
   }
 
   .shop_wrap {
@@ -204,6 +225,14 @@ export default {
 
   .shop_wrap .goods .item .item_info .collection {
     display: none;
+  }
+
+  .shop_wrap .nothing {
+    width: 100%;
+    font-size: 1.5em;
+    line-height: 1em;
+    height: 1em;
+    text-align: center;
   }
 
 }

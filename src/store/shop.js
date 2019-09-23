@@ -6,7 +6,7 @@ export default {
         name: "Cropped parka with faux fur hood trim",
         category: "coats",
         collection: "VINTAGE INSPIRED",
-        priceDollar: 80,
+        priceDollar: 100,
         colors: [ "pink", "black" ],
         sizes: ['xs'],
         id: 11534 ,
@@ -61,7 +61,7 @@ export default {
         name: "Metallic thread dress",
         category: "dresses",
         collection: "PRAY FOR ROCK",
-        priceDollar: 50,
+        priceDollar: 25,
         colors: [ "Fuchsia" ],
         sizes: ['l', 'xl'],
         id: 12002 ,
@@ -89,20 +89,49 @@ export default {
       size: ['xs', 's', 'm', 'l', 'xl']
     },
     sizeChecked: [],
-    newCollectionShowed: false
+    newCollectionShowed: false,
+    currentPriceFrom: 0,
+    currentPriceTo: 0
   },
   mutations: {
-    updateSizeChecked(state, value) {
+    updateSizeChecked (state, value) {
       state.sizeChecked = value;
     },
-    updateNewCollectionShowed(state, value) {
+    updateNewCollectionShowed (state, value) {
       state.newCollectionShowed = value;
+    },
+    clearFilter (state) {
+      state.sizeChecked = [];
+      state.newCollectionShowed = false;
+    },
+    updateCurrentPriceFrom (state, value) {
+      state.currentPriceFrom = value
+    },
+    updateCurrentPriceTo(state, value) {
+      state.currentPriceTo = value
     },
   },
   actions: {
 
   },
   getters: {
-
+    priceFrom (state) {
+      let minPrice = state.goods[0].priceDollar
+      for (let i = 0; i < state.goods.length; i++) {
+        if (state.goods[i].priceDollar < minPrice) {
+          minPrice = state.goods[i].priceDollar
+        }
+      }
+      return minPrice
+    },
+    priceTo (state) {
+      let maxPrice = state.goods[0].priceDollar
+      for (let i = 0; i < state.goods.length; i++) {
+        if (state.goods[i].priceDollar > maxPrice) {
+          maxPrice = state.goods[i].priceDollar
+        }
+      }
+      return maxPrice
+    },
   }
 }
