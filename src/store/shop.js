@@ -94,8 +94,8 @@ export default {
     currentPriceTo: 0,
     sorts: [
       {name: 'Popularity', value: 'pop'},
-      {name: 'Price ⏶', value: 'prlowtohigh'},
-      {name: 'Price ⏷', value: 'prhightolow'},
+      {name: 'Price Low to High', value: 'prlowtohigh'},
+      {name: 'Price High to Low', value: 'prhightolow'},
     ],
     sortType: 'pop'
   },

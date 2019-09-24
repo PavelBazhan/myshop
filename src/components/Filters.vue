@@ -6,7 +6,7 @@
 
     <div class="filter_wrap">
       <div class="title" :class="{fOpened: categoriesOpened, fClosed: !categoriesOpened}" @click="switchFilter('category')">
-        <span @click="qwer">{{$store.getters.priceFrom}} CATEGORIES</span>
+        <span>CATEGORIES</span>
       </div>
       <ul class="categ_list">
         <li>
@@ -79,7 +79,7 @@
 
       </ul>
 
-      <div class="title">
+      <div class="title" :class="{fOpened: sortOpened, fClosed: !sortOpened}" @click="switchFilter('sort')">
         <span>SORT</span>
       </div>
       <ul class="sort_list">
@@ -109,7 +109,8 @@ export default {
     return {
       categoriesOpened: false,
       filterOpened: false,
-      refineOpened: false
+      refineOpened: false,
+      sortOpened: false
     }
   },
   computed: {
@@ -191,11 +192,14 @@ export default {
       this.refineOpened = !this.refineOpened
     },
     switchFilter(filter) {
-      if (filter == 'category') {
-        this.categoriesOpened = !this.categoriesOpened
-      }
       if (filter == 'filter') {
         this.filterOpened = !this.filterOpened
+      }
+      if (filter == 'sort') {
+        this.sortOpened = !this.sortOpened
+      }
+      if (filter == 'category') {
+        this.categoriesOpened = !this.categoriesOpened
       }
     },
     qwer () {
@@ -575,7 +579,23 @@ export default {
       -webkit-box-align: start;
     }
 
+    .sort_list {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+    }
 
+    .title.fClosed + .sort_list {
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .title.fOpened + .sort_list {
+      height: auto;
+      overflow: hidden;
+    }
 
 
 
