@@ -3,13 +3,19 @@
     <div class="instashop">
 
       <div class="link_block">
-        <a href="#">SHOP INSTAGRAM</a>
+        <a
+          href="https://www.instagram.com/myshop"
+          target="_blank">
+          SHOP INSTAGRAM</a>
       </div>
 
       <div class="gallery">
         <div class="item_wrap">
           <div class="item">
-            <a href="#" target="_blank" :style="{ backgroundImage: `url(./images/${instashop_block[0].pathPic})` }">
+            <a
+              :href="`https://www.instagram.com/${instashop_block[0].title.slice(1)}`"
+              target="_blank"
+              :style="{ backgroundImage: `url(./images/${instashop_block[0].pathPic})` }">
               <div class="link_cover">
                 <div class="title">
                   <p>{{ instashop_block[0].title }}</p>
@@ -21,7 +27,7 @@
         <div class="item_wrap">
           <div class="item" v-for="(galleryItem, ind) of instashop_block" v-if="ind && ind<=4">
             <a
-              href="#"
+              :href="`https://www.instagram.com/${galleryItem.title.slice(1)}`"
               target="_blank"
               :style="{ backgroundImage: `url(./images/${galleryItem.pathPic})` }"
             >
@@ -36,7 +42,10 @@
       </div>
 
       <div class="link_block">
-        <a href="#">#{{ $store.state.title }}</a>
+        <a
+        href="https://www.instagram.com/myshop"
+        target="_blank">
+        #{{ $store.state.title }}</a>
       </div>
 
     </div>

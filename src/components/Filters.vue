@@ -6,7 +6,7 @@
 
     <div class="filter_wrap">
       <div class="title" :class="{fOpened: categoriesOpened, fClosed: !categoriesOpened}" @click="switchFilter('category')">
-        <span @click="qwer">CATEGORIES</span>
+        <span @click="qwer">{{$store.getters.priceFrom}} CATEGORIES</span>
       </div>
       <ul class="categ_list">
         <li>
@@ -83,8 +83,17 @@
         <span>SORT</span>
       </div>
       <ul class="sort_list">
-        <li>Price ⏶</li>
-        <li>Price ⏷</li>
+        <li v-for="sortT in sortList">
+          <span
+            :name="sortT.value"
+            :class="{ active: sortType == sortT.value }"
+            @click="changeSortType(sortT.value)"
+          >
+            {{ sortT.name }}
+          </span>
+        </li>
+
+
       </ul>
     </div>
 
@@ -132,6 +141,9 @@ export default {
       }
       return newUrl
     },
+    sortList () {
+      return this.$store.state.shop.sorts
+    },
 
     sizeChecked: {
       get () {
@@ -155,7 +167,7 @@ export default {
       },
       set (value) {
         this.$store.commit('updateCurrentPriceFrom', value)
-      }
+      },
     },
     currentPriceTo: {
       get () {
@@ -163,6 +175,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateCurrentPriceTo', value)
+      }
+    },
+    sortType: {
+      get () {
+        return this.$store.state.shop.sortType
+      },
+      set (value) {
+        this.$store.commit('updateSortType', value)
       }
     }
   },
@@ -179,8 +199,8 @@ export default {
       }
     },
     qwer () {
-      console.log(this.currentPriceFrom)
-      console.log(this.priceFrom)
+      console.log(this.$set())
+      // console.log(this.$store.state.shop.sortType)
     },
     updateRoute () {
       // console.log('update route')
@@ -201,10 +221,19 @@ export default {
         delete newUrl.priceRange
       }
 
+      if (this.sortType != 'pop') {
+        newUrl.sort = this.sortType
+      } else {
+        delete newUrl.sort
+      }
+
       this.$router.push({
         name: this.$route.name,
         params: this.$route.params,
         query: newUrl }).catch(err => {})
+    },
+    changeSortType (stype) {
+      this.sortType = stype
     }
   },
   watch: {
@@ -220,6 +249,9 @@ export default {
         }
         if (this.$route.query.priceRange) {
           // priceRange !!!
+        }
+        if (this.$route.query.sort) {
+          this.sortType = this.$route.query.sort
         }
       },
       deep: true,
@@ -238,6 +270,9 @@ export default {
       if (this.currentPriceTo < this.currentPriceFrom) {
         this.currentPriceFrom = this.currentPriceTo
       }
+      this.updateRoute()
+    },
+    sortType () {
       this.updateRoute()
     }
   },
@@ -372,6 +407,19 @@ export default {
     border-right: none;
     border-bottom: 1px solid #eee;
     outline: none;
+  }
+
+  .sort_list span {
+    color: black;
+  }
+
+  .sort_list span:hover {
+    color: black;
+    cursor: pointer;
+  }
+
+  .sort_list span.active {
+    text-decoration: underline;
   }
 
   @media screen and (max-width: 600px) {

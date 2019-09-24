@@ -91,7 +91,13 @@ export default {
     sizeChecked: [],
     newCollectionShowed: false,
     currentPriceFrom: 0,
-    currentPriceTo: 0
+    currentPriceTo: 0,
+    sorts: [
+      {name: 'Popularity', value: 'pop'},
+      {name: 'Price ⏶', value: 'prlowtohigh'},
+      {name: 'Price ⏷', value: 'prhightolow'},
+    ],
+    sortType: 'pop'
   },
   mutations: {
     updateSizeChecked (state, value) {
@@ -100,19 +106,26 @@ export default {
     updateNewCollectionShowed (state, value) {
       state.newCollectionShowed = value;
     },
-    clearFilter (state) {
-      state.sizeChecked = [];
-      state.newCollectionShowed = false;
-    },
     updateCurrentPriceFrom (state, value) {
       state.currentPriceFrom = value
     },
     updateCurrentPriceTo(state, value) {
       state.currentPriceTo = value
     },
+    updateSortType(state, value) {
+      state.sortType = value
+    }
   },
   actions: {
+    clearFilter (context) {
+      context.state.sizeChecked = [];
+      context.state.newCollectionShowed = false;
 
+      context.state.currentPriceFrom = context.getters.priceFrom;
+      context.state.currentPriceTo = context.getters.priceTo;
+
+      context.state.sortType = 'pop';
+    }
   },
   getters: {
     priceFrom (state) {

@@ -15,9 +15,9 @@ export default {
         buttonTitle: "SHOP NOW",
         backgroundImage: "vintage_inspired.jpg",
         extraImages: [
-          { pathPic: "vintage_inspired_extra01.jpg", pathUrl: "#", title: "Cowboy boots with metallic toecaps"},
-          { pathPic: "vintage_inspired_extra02.jpg", pathUrl: "#", title: "Iridescent tote bag" },
-          { pathPic: "vintage_inspired_extra03.jpg", pathUrl: "#", title: "Crossbody bag with foldover flap and ring" }
+          { pathPic: "vintage_inspired_extra01.jpg", pathUrl: "/catalog/coats/11534", title: "Cropped parka with faux fur hood trim"},
+          { pathPic: "vintage_inspired_extra02.jpg", pathUrl: "#", title: "Long belted coat" },
+          { pathPic: "vintage_inspired_extra03.jpg", pathUrl: "#", title: "Metallic thread dress" }
         ]
       },
       {

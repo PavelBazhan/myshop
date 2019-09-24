@@ -13,7 +13,7 @@
             <span>COLLECTIONS</span>
           </li>
         </router-link>
-        <router-link tag="a" to="/new_collection" active-class="menu_active">
+        <router-link tag="a" :to="{name: 'shop', query: {nc: null}}">
           <li>
             <span>NEW ARRIVALS</span>
           </li>
@@ -103,8 +103,7 @@ export default {
       this.dropDownMenuIsOpened = !this.dropDownMenuIsOpened
     },
     clearFilter () {
-      console.log('clear')
-      this.$store.commit('clearFilter')
+      this.$store.dispatch('clearFilter')
     }
   },
   computed: {

@@ -5,9 +5,20 @@
       <div class="goods_wrap">
 
         <div class="location">
-          <span @click="qwer">Catalog</span>
-          <span>></span>
-          <span>Something</span>
+          <router-link tag="a" to="/catalog">
+            <span @click="$store.dispatch('clearFilter')">Catalog</span>
+          </router-link>
+          <span v-if="$route.params.category">></span>
+          <router-link
+            tag="a"
+            :to="{ name: $route.name, params: $route.params }"
+            style="text-transform: capitalize"
+            v-if="$route.params.category"
+          >
+            <span @click="$store.dispatch('clearFilter')">
+              {{ this.$route.params.category.replace(/_/g, " " ) }}
+            </span>
+          </router-link>
         </div>
 
         <div class="goods" v-if="filteredGoods.length > 0">
@@ -98,8 +109,27 @@ export default {
           return true
         }
       })
+
+      switch (this.$store.state.shop.sortType) {
+        case 'prlowtohigh':
+          output.sort((itemA, itemB) => {
+            return itemA.priceDollar - itemB.priceDollar
+          })
+          break;
+        case 'prhightolow':
+          output.sort((itemA, itemB) => {
+            return itemB.priceDollar - itemA.priceDollar
+          })
+          break;
+      }
+
       return output
     }
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('leaved')
+    this.$store.dispatch('clearFilter')
+    next()
   }
 }
 </script>
@@ -130,14 +160,19 @@ export default {
   font-weight: bold;
 }
 
-.shop_wrap .goods_wrap .location span {
+.shop_wrap .goods_wrap .location a {
   width: 100%;
   height: 3em;
   line-height: 3em;
+  color: black;
+  font-weight: bold;
+}
+
+.shop_wrap .goods_wrap .location span {
   margin-right: 1em;
 }
 
-.shop_wrap .goods_wrap .location span:last-child {
+.shop_wrap .goods_wrap .location a:last-child {
   font-weight: 400;
 }
 

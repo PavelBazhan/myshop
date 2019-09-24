@@ -6,9 +6,11 @@
         <div class="item">
           <h2>{{ newcollection_block_item.title }}</h2>
           <p>{{ newcollection_block_item.description }}</p>
-          <a href="#">
+          <router-link tag="a" :to="{name: 'shop', query: {nc: null}}">
             <button>{{ newcollection_block_item.buttonTitle }}</button>
-          </a>
+          </router-link>
+
+
         </div>
       </div>
     </div>
@@ -18,28 +20,31 @@
         <div class="item">
           <h2>{{ block.title }}</h2>
           <p>{{ block.description }}</p>
-          <a href="#">
+
+
+          <a href="/catalog">
             <button>{{ block.buttonTitle }}</button>
           </a>
+
         </div>
       </div>
 
       <div class="extra-images" v-if="block.extraImages">
-        <a href="#" :style="{ backgroundImage: `url('./images/${block.extraImages[0].pathPic}')`}">
+        <a href="/catalog/coats/11534" :style="{ backgroundImage: `url('./images/${block.extraImages[0].pathPic}')`}">
           <div class="link_cover">
             <div class="title">
               <p>{{ block.extraImages[0].title }}</p>
             </div>
           </div>
         </a>
-        <a href="#" :style="{ backgroundImage: `url('./images/${block.extraImages[1].pathPic}')`}">
+        <a href="/catalog/coats/11933" :style="{ backgroundImage: `url('./images/${block.extraImages[1].pathPic}')`}">
           <div class="link_cover">
             <div class="title">
               <p>{{ block.extraImages[1].title }}</p>
             </div>
           </div>
         </a>
-        <a href="#" :style="{ backgroundImage: `url('./images/${block.extraImages[2].pathPic}')`}">
+        <a href="/catalog/dresses/12002" :style="{ backgroundImage: `url('./images/${block.extraImages[2].pathPic}')`}">
           <div class="link_cover">
             <div class="title">
               <p>{{ block.extraImages[2].title }}</p>
