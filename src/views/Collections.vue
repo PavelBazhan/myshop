@@ -92,7 +92,7 @@ export default {
 
   .collection_block .background {
     width: 100%;
-    height: 100vh;
+    height: 52vw;
     position: relative;
     background-position: center top;
     background-size: cover;
@@ -103,34 +103,34 @@ export default {
     max-width: 42vw;
     position: absolute;
     right: auto;
-    bottom: 12vh;
+    bottom: 6vw;
     left: 10.5vw;
     background: rgba(0, 0, 0, 0.5);
-    padding: 3vh 2vw;
+    padding: 1.5vw 2vw;
     box-sizing: content-box;
     color: white;
   }
 
   .collection_block .item h2 {
-    font-size: 4.5vh;
+    font-size: 2.5vw;
     font-weight: 800;
-    margin-bottom: 2vh;
+    margin-bottom: 1vw;
   }
 
   .collection_block .item p {
-    font-size: 1.8vh;
+    font-size: 0.9vw;
     line-height: 1.2em;
-    margin-bottom: 3vh;
+    margin-bottom: 1.5vw;
   }
 
   .collection_block .item button {
     width: 17vw;
-    height: 6vh;
+    height: 3vw;
     position: relative;
     box-sizing: border-box;
     background: transparent;
     border: 1px solid white;
-    font-size: 2vh;
+    font-size: 0.8vw;
     line-height: 1.2em;
     color: white;
     z-index: 1;
@@ -142,8 +142,6 @@ export default {
     color: black;
   }
 
-
-
   .collection_block .extra-images {
     display: flex;
     flex-flow: row nowrap;
@@ -153,7 +151,7 @@ export default {
   .collection_block .extra-images a {
     display: block;
     width: 30%;
-    height: 80vh;
+    height: 40vw;
     background-size: cover;
     background-position: center center;
     color: black;
@@ -205,13 +203,13 @@ export default {
     .collection_block:nth-child(2n) .item {
       right: auto;
       left: 10.5vw;
-      bottom: 45vh;
+      bottom: 22vw;
     }
 
     .collection_block:nth-child(3n) .item {
       right: 8vw;
       left: auto;
-      bottom: 12vh;
+      bottom: 6vw;
     }
 
     .collection_block .item button:before {
@@ -221,7 +219,7 @@ export default {
       height: 18vw;
       position: absolute;
       left: -0.5vw;
-      top: 6vh;
+      top: 3vw;
       border-radius: 50%;
       background: white;
       z-index: -1;
@@ -229,7 +227,7 @@ export default {
     }
 
     .collection_block .item button:hover:before {
-      transform: translateY(calc(-3vh - 9vw));
+      transform: translateY(calc(-1.5vw - 9vw));
     }
   }
 
