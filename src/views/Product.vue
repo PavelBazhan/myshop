@@ -1,82 +1,104 @@
 <template>
   <section id="product">
-    <div class="images_wrap">
-      <div class="images_inner">
-        <div class="image">
-          <img src="/images/shop/11534_pink_1.jpg" alt="">
+    <div class="current_product">
+      <div class="images_wrap">
+        <div class="images_inner">
+          <div class="image">
+            <img src="/images/shop/11534_pink_1.jpg" alt="">
+          </div>
+          <div class="image">
+            <img src="/images/shop/11534_pink_0.jpg" alt="">
+          </div>
         </div>
-        <div class="image">
-          <img src="/images/shop/11534_pink_0.jpg" alt="">
+      </div>
+      <div class="description_wrap">
+        <div class="description">
+          <p class="collection_name">VINTAGE INSPIRED</p>
+          <p class="title">Cropped parka with faux fur hood trim</p>
+          <p class="price">USD <strong>$100</strong></p>
+          <p class="color">COLOR: Pink</p>
+          <div class="color_panel">
+            <label>
+              <input type="radio" name="choosen_color" value="">
+              <div class="color_block gray"></div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_color" value="">
+              <div class="color_block black"></div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_color" value="">
+              <div class="color_block pink active"></div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_color" value="">
+              <div class="color_block red"></div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_color" value="">
+              <div class="color_block blue"></div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_color" value="">
+              <div class="color_block green"></div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_color" value="">
+              <div class="color_block white"></div>
+            </label>
+          </div>
+          <p class="size">SIZE</p>
+          <div class="size_panel">
+            <label>
+              <input type="radio" name="choosen_size" value="">
+              <div class="size_block">XS</div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_size" value="">
+              <div class="size_block active">S</div>
+            </label>
+            <label>
+              <input type="radio" name="choosen_size" value="">
+              <div class="size_block">M</div>
+            </label>
+          </div>
+          <button class="add_to_bag">ADD TO BAG</button>
+          <ul class="extra_info">
+            <li class="desc_opened">
+              <p class="title">PRODUCT DESCRIPTION</p>
+              <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
+            </li>
+            <li>
+              <p class="title">SHIPPING & RETURNS</p>
+              <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
+            </li>
+            <li>
+              <p class="title">FABRIC COMPOSITION</p>
+              <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="description_wrap">
-      <div class="description">
-        <p class="collection_name">VINTAGE INSPIRED</p>
-        <p class="title">Cropped parka with faux fur hood trim</p>
-        <p class="price">USD <strong>$100</strong></p>
-        <p class="color">COLOR: Pink</p>
-        <div class="color_panel">
-          <label>
-            <input type="radio" name="choosen_color" value="">
-            <div class="color_block gray"></div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_color" value="">
-            <div class="color_block black"></div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_color" value="">
-            <div class="color_block pink active"></div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_color" value="">
-            <div class="color_block red"></div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_color" value="">
-            <div class="color_block blue"></div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_color" value="">
-            <div class="color_block green"></div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_color" value="">
-            <div class="color_block white"></div>
-          </label>
+    <div class="more_products">
+      <div class="block">
+        <div class="text">
+          <p>VINTAGE INSPIRED</p>
+          <p>more things from this collection</p>
         </div>
-        <p class="size">SIZE</p>
-        <div class="size_panel">
-          <label>
-            <input type="radio" name="choosen_size" value="">
-            <div class="size_block">XS</div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_size" value="">
-            <div class="size_block active">S</div>
-          </label>
-          <label>
-            <input type="radio" name="choosen_size" value="">
-            <div class="size_block">M</div>
-          </label>
-        </div>
-        <button class="add_to_bag">ADD TO BAG</button>
-        <ul class="extra_info">
-          <li class="desc_opened">
-            <p class="title">PRODUCT DESCRIPTION</p>
-            <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
-          </li>
-          <li>
-            <p class="title">SHIPPING & RETURNS</p>
-            <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
-          </li>
-          <li>
-            <p class="title">FABRIC COMPOSITION</p>
-            <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
-          </li>
-        </ul>
       </div>
+      <div class="block">
+        <a href="/catalog/coats/11933">
+          <img src="/images/shop/11933_stone_0.jpg" alt="">
+        </a>
+      </div>
+      <div class="block">
+        <a href="/catalog/dresses/11534">
+          <img src="/images/shop/12001_black_0.jpg" alt="">
+        </a>
+      </div>
+
+
     </div>
   </section>
 </template>
@@ -100,8 +122,13 @@ export default {
 #product {
   width: 100%;
   padding-top: 5vw;
+}
+
+.current_product {
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
+  margin-bottom: 4em;
 }
 
 .images_wrap {
@@ -117,11 +144,11 @@ export default {
   /* width: 50%; */
 }
 
-.images_inner  .image:last-child {
+.images_inner .image:last-child {
   border-left: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.images_inner  .image img {
+.images_inner .image img {
   width: 100%;
 }
 
@@ -287,4 +314,46 @@ button.add_to_bag {
   height: auto;
 }
 
+.more_products {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  margin-bottom: 4em;
+}
+
+.more_products .block:first-child {
+  width: 32%;
+}
+
+.more_products .block {
+  width: 34%;
+}
+
+.more_products .block:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.more_products .block:last-child {
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.more_products .block .text p {
+  text-align: center;
+}
+
+.more_products .block .text p:first-child {
+  font-weight: bold;
+  font-size: 3em;
+}
+
+.more_products .block .text p:last-child {
+  font-size: 1.5em;
+}
+
+.more_products .block img {
+  width: 100%;
+  height: 100%;
+}
 </style>
