@@ -21,7 +21,7 @@ export default {
         category: "coats",
         collection: "",
         priceDollar: 70,
-        colors: [ "gray", "camel", "black" ],
+        colors: [ "gray", "camel"],
         sizes: ['s'],
         id: 11720 ,
         imagesByColor: [
