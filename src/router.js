@@ -6,6 +6,7 @@ import Shop from './views/Shop.vue'
 import NewCollection from './views/NewCollection.vue'
 import Bag from './views/Bag.vue'
 import SignIn from './views/SignIn.vue'
+import Product from './views/Product.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/catalog/:category',
       name: 'shopCateg',
       component: Shop
+    },
+    {
+      path: '/catalog/:category/:id',
+      name: 'product',
+      component: Product
     },
     {
       path: '/new_collection',
