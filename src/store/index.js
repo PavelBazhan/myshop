@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import collections from './collections.js'
 import footer from './footer.js'
 import shop from './shop.js'
+import product from './product.js'
 
 Vue.use(Vuex)
 

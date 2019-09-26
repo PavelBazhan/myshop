@@ -36,7 +36,7 @@ export default {
         collection: "VINTAGE INSPIRED",
         priceDollar: 80,
         colors: [ "stone", "brown" ],
-        sizes: ['m'],
+        sizes: ['xs', 'm', 'l'],
         id: 11933 ,
         imagesByColor: [
           [ "11933_stone_0.jpg", "11933_stone_1.jpg" ],
@@ -51,7 +51,7 @@ export default {
         priceDollar: 60,
         colors: [ "black" ],
         sizes: ['xs', 's', 'm', 'xl'],
-        id: 11534 ,
+        id: 12001 ,
         imagesByColor: [
           [ "12001_black_0.jpg", "12001_black_1.jpg" ]
         ],
@@ -62,7 +62,7 @@ export default {
         category: "dresses",
         collection: "PRAY FOR ROCK",
         priceDollar: 25,
-        colors: [ "Fuchsia" ],
+        colors: [ "fuchsia" ],
         sizes: ['l', 'xl'],
         id: 12002 ,
         imagesByColor: [
@@ -87,6 +87,19 @@ export default {
     ],
     filters: {
       size: ['xs', 's', 'm', 'l', 'xl']
+    },
+    colors: {
+      gray: "#DFDED9",
+      black: "#000000",
+      pink: "#FFCCFF",
+      red: "#FF6666",
+      blue: "#4d91ff",
+      green: "#61ff79",
+      white: "#ffffff",
+      stone: "#888c8d",
+      fuchsia: "#FF00FF",
+      brown: "#804000",
+      camel: "#C19A6B"
     },
     sizeChecked: [],
     newCollectionShowed: false,

@@ -30,27 +30,39 @@
       </div>
 
       <div class="extra-images" v-if="block.extraImages">
-        <a href="/catalog/coats/11534" :style="{ backgroundImage: `url('./images/${block.extraImages[0].pathPic}')`}">
+        <router-link
+          tag="a"
+          to="/catalog/coats/11534"
+          :style="{ backgroundImage: `url('./images/${block.extraImages[0].pathPic}')`}"
+        >
           <div class="link_cover">
             <div class="title">
               <p>{{ block.extraImages[0].title }}</p>
             </div>
           </div>
-        </a>
-        <a href="/catalog/coats/11933" :style="{ backgroundImage: `url('./images/${block.extraImages[1].pathPic}')`}">
+        </router-link>
+        <router-link
+          tag="a"
+          to="/catalog/coats/11933"
+          :style="{ backgroundImage: `url('./images/${block.extraImages[1].pathPic}')`}"
+        >
           <div class="link_cover">
             <div class="title">
               <p>{{ block.extraImages[1].title }}</p>
             </div>
           </div>
-        </a>
-        <a href="/catalog/dresses/12002" :style="{ backgroundImage: `url('./images/${block.extraImages[2].pathPic}')`}">
+        </router-link>
+        <router-link
+          tag="a"
+          to="/catalog/dresses/12002"
+          :style="{ backgroundImage: `url('./images/${block.extraImages[2].pathPic}')`}"
+        >
           <div class="link_cover">
             <div class="title">
               <p>{{ block.extraImages[2].title }}</p>
             </div>
           </div>
-        </a>
+        </router-link>
       </div>
     </div>
 

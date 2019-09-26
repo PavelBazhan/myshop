@@ -4,76 +4,45 @@
       <div class="images_wrap">
         <div class="images_inner">
           <div class="image">
-            <img src="/images/shop/11534_pink_1.jpg" alt="">
+            <img :src="`/images/shop/${$route.params.id}_${choosenColor}_1.jpg`" alt="">
           </div>
           <div class="image">
-            <img src="/images/shop/11534_pink_0.jpg" alt="">
+            <img :src="`/images/shop/${$route.params.id}_${choosenColor}_0.jpg`" alt="">
           </div>
         </div>
       </div>
       <div class="description_wrap">
         <div class="description">
-          <p class="collection_name">VINTAGE INSPIRED</p>
-          <p class="title">Cropped parka with faux fur hood trim</p>
-          <p class="price">USD <strong>$100</strong></p>
-          <p class="color">COLOR: Pink</p>
+          <p class="collection_name">{{ product.collection }}</p>
+          <p class="title">{{ product.name }}</p>
+          <p class="price">USD <strong>${{ product.priceDollar }}</strong></p>
+          <p class="color" @click="qwer">COLOR: <span>{{choosenColor}}</span></p>
           <div class="color_panel">
-            <label>
-              <input type="radio" name="choosen_color" value="">
-              <div class="color_block gray"></div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_color" value="">
-              <div class="color_block black"></div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_color" value="">
-              <div class="color_block pink active"></div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_color" value="">
-              <div class="color_block red"></div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_color" value="">
-              <div class="color_block blue"></div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_color" value="">
-              <div class="color_block green"></div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_color" value="">
-              <div class="color_block white"></div>
+            <label v-for="color of product.colors">
+              <input type="radio" name="choosen_color" :value="color" v-model="choosenColor">
+              <div class="color_block" :class="{ active: (color == choosenColor) }" :style="{ background: generalColors[color] }"></div>
             </label>
           </div>
+
           <p class="size">SIZE</p>
           <div class="size_panel">
-            <label>
-              <input type="radio" name="choosen_size" value="">
-              <div class="size_block">XS</div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_size" value="">
-              <div class="size_block active">S</div>
-            </label>
-            <label>
-              <input type="radio" name="choosen_size" value="">
-              <div class="size_block">M</div>
+            <label v-for="size in product.sizes">
+              <input type="radio" name="choosen_size" :value="size" v-model="choosenSize">
+              <div class="size_block" :class="{ active: (size == choosenSize)}">{{ size }}</div>
             </label>
           </div>
           <button class="add_to_bag">ADD TO BAG</button>
           <ul class="extra_info">
-            <li class="desc_opened">
-              <p class="title">PRODUCT DESCRIPTION</p>
+            <li :class="{ desc_opened: prodDescriptionOpened }">
+              <p class="title" @click="switchExtra('prodDescription')">PRODUCT DESCRIPTION</p>
               <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
             </li>
-            <li>
-              <p class="title">SHIPPING & RETURNS</p>
+            <li :class="{ desc_opened: shippingOpened }">
+              <p class="title" @click="switchExtra('shipping')">SHIPPING & RETURNS</p>
               <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
             </li>
-            <li>
-              <p class="title">FABRIC COMPOSITION</p>
+            <li :class="{ desc_opened: fabricOpened }">
+              <p class="title" @click="switchExtra('fabric')">FABRIC COMPOSITION</p>
               <p class="info">Saints are a low-waist, drop crotch relaxed boyfriend jean. Straight fit across the hips, bow shape legs, with knee darts and tapered leg. Back pockets dropped slightly for slouch feel. </p>
             </li>
           </ul>
@@ -88,14 +57,14 @@
         </div>
       </div>
       <div class="block">
-        <a href="/catalog/coats/11933">
+        <router-link tag="a" to="/catalog/coats/11933">
           <img src="/images/shop/11933_stone_0.jpg" alt="">
-        </a>
+        </router-link>
       </div>
       <div class="block">
-        <a href="/catalog/dresses/11534">
+        <router-link tag="a" to="/catalog/dresses/12001">
           <img src="/images/shop/12001_black_0.jpg" alt="">
-        </a>
+        </router-link>
       </div>
 
 
@@ -106,14 +75,63 @@
 <script>
 
 export default {
+  data () {
+    return {
+      prodDescriptionOpened: false,
+      shippingOpened: false,
+      fabricOpened: false,
+      choosenColor: null,
+      choosenSize: null
+    }
+  },
   methods: {
-
+    qwer() {
+      console.log(this.$route.params.id)
+      console.log(this.$store.state.shop.goods)
+    },
+    switchExtra (type) {
+      switch(type) {
+        case 'prodDescription':
+          this.prodDescriptionOpened = !this.prodDescriptionOpened
+          break
+        case 'shipping':
+          this.shippingOpened = !this.shippingOpened
+          break
+        case 'fabric':
+          this.fabricOpened = !this.fabricOpened
+          break
+      }
+    }
   },
   components: {
 
   },
   computed: {
-
+    product () {
+      let id = this.$route.params.id
+      let goods = this.$store.state.shop.goods
+      for (let i = 0; i < goods.length; i++) {
+        if (goods[i].id == id) {
+          return goods[i]
+        }
+      }
+    },
+    generalColors () {
+      return this.$store.state.shop.colors
+    }
+  },
+  mounted () {
+    this.choosenColor = this.product.colors[0]
+  },
+  watch: {
+    '$route': {
+      handler: function(search) {
+        this.choosenColor = this.product.colors[0]
+        this.choosenSize = this.product.sizes[0]
+      },
+      deep: true,
+      immediate: true
+    }
   }
 }
 </script>
@@ -214,35 +232,6 @@ export default {
   width: 3em;
 }
 
-.color_panel .gray {
-  background: gray;
-}
-
-.color_panel .black {
-  background: black;
-}
-
-.color_panel .pink {
-  background: #FFCCFF;
-}
-
-.color_panel .red {
-  background: #FF6666;
-}
-
-.color_panel .blue {
-  background: blue;
-}
-
-.color_panel .green {
-  background: green;
-}
-
-.color_panel .white {
-  background: white;
-  border: 1px solid #aaa;
-}
-
 .size_panel {
   margin-bottom: 2em;
 }
@@ -255,6 +244,7 @@ export default {
   text-align: center;
   line-height: 2em;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .size_panel label input[type=radio] {
