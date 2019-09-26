@@ -13,7 +13,7 @@
       </div>
       <div class="description_wrap">
         <div class="description">
-          <p class="collection_name">{{ product.collection }}</p>
+          <p class="collection_name" v-if="product.collection != ''">{{ product.collection }}</p>
           <p class="title">{{ product.name }}</p>
           <p class="price">USD <strong>${{ product.priceDollar }}</strong></p>
           <p class="color" @click="qwer">COLOR: <span>{{choosenColor}}</span></p>
@@ -32,6 +32,7 @@
             </label>
           </div>
           <button class="add_to_bag">ADD TO BAG</button>
+          <button class="back" @click="backToShop">BACK TO SHOP</button>
           <ul class="extra_info">
             <li :class="{ desc_opened: prodDescriptionOpened }">
               <p class="title" @click="switchExtra('prodDescription')">PRODUCT DESCRIPTION</p>
@@ -81,13 +82,17 @@ export default {
       shippingOpened: false,
       fabricOpened: false,
       choosenColor: null,
-      choosenSize: null
+      choosenSize: null,
+      prevRoute: null
     }
   },
   methods: {
-    qwer() {
+    qwer () {
       console.log(this.$route.params.id)
       console.log(this.$store.state.shop.goods)
+    },
+    backToShop () {
+      this.$router.go(-1)
     },
     switchExtra (type) {
       switch(type) {
@@ -132,6 +137,11 @@ export default {
       deep: true,
       immediate: true
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.prevRoute = from
+    })
   }
 }
 </script>
@@ -264,6 +274,16 @@ button.add_to_bag {
   margin-bottom: 1em;
 }
 
+button.back {
+  width: 100%;
+  height: 3em;
+  background: white;
+  color: #888;
+  border: 2px solid #bbb;
+  margin-bottom: 1em;
+  display: none;
+}
+
 .description ul.extra_info {
   margin: 0;
   padding: 0;
@@ -309,6 +329,7 @@ button.add_to_bag {
   flex-flow: row nowrap;
   width: 100%;
   margin-bottom: 4em;
+  font-size: 1vw;
 }
 
 .more_products .block:first-child {
@@ -344,6 +365,74 @@ button.add_to_bag {
 
 .more_products .block img {
   width: 100%;
-  height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  #product {
+    padding-top: 15vw;
+    font-size: 5vw;
+  }
+
+  .current_product {
+    flex-direction: column;
+  }
+
+  .images_wrap {
+    width: 100%;
+  }
+
+  .images_wrap .image:last-child {
+    border: none;
+  }
+
+  .images_wrap .image:first-child {
+    display: none;
+  }
+
+  .description_wrap {
+    width: 100%;
+    font-size: 4vw;
+  }
+
+  .description {
+    width: 80%;
+  }
+
+  .color_panel .color_block {
+    width: 3em;
+    height: 3em;
+  }
+
+  .size_panel .size_block {
+    width: 3em;
+    height: 3em;
+    line-height: 3em;
+  }
+
+  button.add_to_bag {
+    height: 4em;
+  }
+
+  button.back {
+    height: 4em;
+    display: block;
+  }
+
+  .more_products {
+    flex-direction: column;
+    font-size: 2vw;
+  }
+
+  .more_products .block {
+    width: 100%;
+  }
+
+  .more_products .block:first-child {
+    width: 100%;
+  }
+
+  .more_products .block:last-child {
+    border-left: none;
+  }
 }
 </style>

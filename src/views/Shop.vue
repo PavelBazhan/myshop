@@ -127,7 +127,6 @@ export default {
     }
   },
   beforeRouteLeave (to, from, next) {
-    console.log('leaved')
     this.$store.dispatch('clearFilter')
     next()
   }

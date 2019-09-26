@@ -9,8 +9,6 @@
           <router-link tag="a" :to="{name: 'shop', query: {nc: null}}">
             <button>{{ newcollection_block_item.buttonTitle }}</button>
           </router-link>
-
-
         </div>
       </div>
     </div>
@@ -21,11 +19,9 @@
           <h2>{{ block.title }}</h2>
           <p>{{ block.description }}</p>
 
-
-          <a href="/catalog">
+          <router-link tag="a" :to="{name: 'shop'}">
             <button>{{ block.buttonTitle }}</button>
-          </a>
-
+          </router-link>
         </div>
       </div>
 

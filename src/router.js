@@ -56,6 +56,12 @@ export default new Router({
     }
   ],
   scrollBehavior (to, from, savedPosition) {
+    if (from.name == 'collections') {
+      return {
+        y: 0
+      }
+    }
+
     if (to.name == 'product') {
       return {
         y: 0
