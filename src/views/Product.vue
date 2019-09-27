@@ -31,8 +31,10 @@
               <div class="size_block" :class="{ active: (size == choosenSize)}">{{ size }}</div>
             </label>
           </div>
+
           <button class="add_to_bag" @click="addToBag">ADD TO BAG</button>
           <button class="back" @click="backToShop">BACK TO SHOP</button>
+
           <ul class="extra_info">
             <li :class="{ desc_opened: prodDescriptionOpened }">
               <p class="title" @click="switchExtra('prodDescription')">PRODUCT DESCRIPTION</p>
@@ -67,8 +69,9 @@
           <img src="/images/shop/12001_black_0.jpg" alt="">
         </router-link>
       </div>
-
-
+    </div>
+    <div class="popup" :class="{ showed: popupShowed }">
+      ITEM ADDED TO BAG
     </div>
   </section>
 </template>
@@ -83,10 +86,22 @@ export default {
       fabricOpened: false,
       choosenColor: null,
       choosenSize: null,
-      prevRoute: null
+      prevRoute: null,
+
+      popupShowed: false
     }
   },
   methods: {
+    switchPopup () {
+      console.log('init: ' + this.popupShowed)
+      this.popupShowed = true
+      console.log('now is: ' + this.popupShowed)
+
+      setTimeout(() => {
+        this.popupShowed = false
+        console.log('end: ' + this.popupShowed)
+      }, 1000)
+    },
     qwer () {
       console.log(this.$route.params.id)
       console.log(this.$store.state.shop.goods)
@@ -114,6 +129,7 @@ export default {
         size: this.choosenSize
       }
       this.$store.commit('addToBag', itemParams)
+      this.switchPopup()
     }
   },
   components: {
@@ -375,6 +391,10 @@ button.back {
   width: 100%;
 }
 
+.popup {
+  display: none;
+}
+
 @media screen and (max-width: 600px) {
   #product {
     padding-top: 15vw;
@@ -441,6 +461,27 @@ button.back {
 
   .more_products .block:last-child {
     border-left: none;
+  }
+
+  .popup {
+    display: block;
+    position: fixed;
+    width: 40vw;
+    top: 5vw;
+    /* right: 5vw; */
+    right: -45vw;
+    padding: 3vw;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 1em;
+    text-align: center;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .popup.showed {
+    transform: translateX(-50vw);
+    opacity: 1;
   }
 }
 </style>

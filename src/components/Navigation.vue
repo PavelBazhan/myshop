@@ -52,7 +52,11 @@
           <li></li>
         </a>
         <router-link tag="a" to="/buy_cart" class="hamburger bag">
-          <li></li>
+          <li>
+            <div class="bag_quantity_mobile" v-if="$store.state.bag.bagItems.length > 0">
+              {{ $store.getters.generalQuantity }}
+            </div>
+          </li>
         </router-link>
       </ul>
 
@@ -386,10 +390,23 @@ nav.white_nav .navi a.bag li {
   height: 1.2vw;
   top: 0.3vw;
   right: 0.3vw;
-  background: Crimson;
+  background: crimson;
   border-radius: 0.7vw;
   line-height: 1.2vw;
   text-align: center;
+}
+
+.bag_quantity_mobile {
+  position: absolute;
+  width: 5vw;
+  height: 5vw;
+  top: 0.3vw;
+  right: 0.3vw;
+  background: crimson;
+  border-radius: 2.5vw;
+  line-height: 5vw;
+  text-align: center;
+  font-size: 3vw;
 }
 
 @media screen and (max-width: 600px) {

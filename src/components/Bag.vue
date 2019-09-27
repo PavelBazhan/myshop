@@ -253,21 +253,4 @@ export default {
   text-transform: uppercase;
 }
 
-/* <div class="items">
-  <div class="item">
-    <img src="/images/shop/11933_brown_0.jpg" alt="">
-    <button class="remove_button"></button>
-    <div class="info">
-      <p>Long belted coat</p>
-      <p>quantity: 1</p>
-      <p>size: s</p>
-      <p>usd $250</p>
-    </div>
-  </div>
-</div> */
-
-
-
-
-
 </style>
