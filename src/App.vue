@@ -3,12 +3,14 @@
     <app-navigation></app-navigation>
     <router-view></router-view>
     <app-footer></app-footer>
+    <app-bag></app-bag>
   </div>
 </template>
 
 <script>
   import appNavigation from './components/Navigation.vue'
   import appFooter from './components/Footer.vue'
+  import appBag from './components/Bag.vue'
 
   export default {
     data () {
@@ -18,7 +20,8 @@
     },
     components: {
       appNavigation,
-      appFooter
+      appFooter,
+      appBag
     }
   }
 </script>
@@ -35,5 +38,10 @@ a {
 
 a:hover {
   color: white;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
 }
 </style>

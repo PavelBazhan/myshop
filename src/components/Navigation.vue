@@ -38,10 +38,13 @@
             <span>SIGN IN</span>
           </li>
         </router-link>
-        <router-link tag="a" to="/buy_cart" active-class="menu_active">
-          <li>
+        <router-link tag="a" :to="{name: $route.name, params: $route.params, query: $route.query}">
+          <li @click="switchBag">
             <div class="icon navi_bag"></div>
             <span>BAG</span>
+            <div class="bag_quantity" v-if="$store.state.bag.bagItems.length > 0">
+              {{ $store.getters.generalQuantity }}
+            </div>
           </li>
         </router-link>
 
@@ -104,6 +107,9 @@ export default {
     },
     clearFilter () {
       this.$store.dispatch('clearFilter')
+    },
+    switchBag () {
+      this.bagIsActive = !this.bagIsActive
     }
   },
   computed: {
@@ -112,6 +118,14 @@ export default {
     },
     dub () {
       return this.$store.state.dub
+    },
+    bagIsActive: {
+      get () {
+        return this.$store.state.bag.bagIsActive
+      },
+      set (value) {
+        this.$store.commit('switchBagIsActive', value)
+      }
     }
   }
 }
@@ -364,6 +378,18 @@ nav.white_nav .navi a.bag li {
 .drop_down_menu ul a {
   font-size: 4vw;
   line-height: 15vw;
+}
+
+.bag_quantity {
+  position: absolute;
+  width: 1.2vw;
+  height: 1.2vw;
+  top: 0.3vw;
+  right: 0.3vw;
+  background: Crimson;
+  border-radius: 0.7vw;
+  line-height: 1.2vw;
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {

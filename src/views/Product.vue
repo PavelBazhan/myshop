@@ -31,7 +31,7 @@
               <div class="size_block" :class="{ active: (size == choosenSize)}">{{ size }}</div>
             </label>
           </div>
-          <button class="add_to_bag">ADD TO BAG</button>
+          <button class="add_to_bag" @click="addToBag">ADD TO BAG</button>
           <button class="back" @click="backToShop">BACK TO SHOP</button>
           <ul class="extra_info">
             <li :class="{ desc_opened: prodDescriptionOpened }">
@@ -106,6 +106,14 @@ export default {
           this.fabricOpened = !this.fabricOpened
           break
       }
+    },
+    addToBag () {
+      let itemParams = {
+        id: this.$route.params.id,
+        color: this.choosenColor,
+        size: this.choosenSize
+      }
+      this.$store.commit('addToBag', itemParams)
     }
   },
   components: {
