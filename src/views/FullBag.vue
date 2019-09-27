@@ -24,7 +24,13 @@
                 }
               }"
             >{{ getProductById(product.id).name }}</router-link>
-            <p>usd ${{ product.quantity*getProductById(product.id).priceDollar }}</p>
+            <p>
+              usd ${{ product.quantity*getProductById(product.id).priceDollar }}
+              <span
+                v-if="product.quantity > 1"
+              >(${{ getProductById(product.id).priceDollar }} per each)
+              </span>
+            </p>
             <p>color: {{ product.color }}</p>
             <p>size: {{ product.size }}</p>
             <p>quantity: {{ product.quantity }}</p>
@@ -35,7 +41,10 @@
       </div>
 
       <div class="total_block">
-        <p>Total USD ${{ totalPrice }}</p>
+        <p>
+          Total USD ${{ totalPrice }}
+        </p>
+
         <button class="proceed">PROCEED TO CHECKOUT</button>
       </div>
 
@@ -114,7 +123,6 @@ export default {
   }
 
   .bag_wrap {
-    /* background: #eee; */
     width: 38%;
   }
 
@@ -215,15 +223,36 @@ export default {
     outline: none;
   }
 
-  /* <div class="total_block">
-    <p>Total USD $490</p>
-    <button class="proceed">PROCEED TO CHECKOUT</button>
-  </div> */
-
-
   @media screen and (max-width: 600px) {
     #bag_full {
       padding-top: 15vw;
+      font-size: 4.5vw;
+    }
+
+    .bag_wrap {
+      width: 90vw;
+    }
+
+    .bag_wrap .items_block .item {
+      padding: 1em 0;
+      flex-flow: column nowrap;
+    }
+
+    .bag_wrap .items_block .item .item_photo {
+      width: 100%;
+    }
+
+    .bag_wrap .items_block .item .item_info {
+      width: 100%;
+      padding: 1em 0;
+    }
+
+    .bag_wrap .total_block .proceed {
+      width: 80%;
+      height: 3em;
+      background: black;
+      border: none;
+      color: white;
     }
   }
 </style>
