@@ -12,7 +12,9 @@
 
       <p class="total">TOTAL: USD ${{ totalPrice }}</p>
 
-      <button class="bag_btn white">VIEW BAG</button>
+      <router-link tag="button" :to="{name: 'bag'}" class="bag_btn white">
+        VIEW BAG
+      </router-link>
       <button class="bag_btn black">CHECKOUT</button>
 
       <div class="items">

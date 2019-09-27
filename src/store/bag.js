@@ -1,7 +1,9 @@
 export default {
   state: {
     bagIsActive: false,
-    bagItems: []
+    bagItems: [
+      {id: 11534, color: 'pink', size: 'xs', quantity: 2}
+    ]
   },
   mutations: {
     switchBagIsActive (state) {

@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Collections from './views/Collections.vue'
 import Shop from './views/Shop.vue'
 import NewCollection from './views/NewCollection.vue'
-import Bag from './views/Bag.vue'
+import FullBag from './views/FullBag.vue'
 import SignIn from './views/SignIn.vue'
 import Product from './views/Product.vue'
 
@@ -43,7 +43,7 @@ export default new Router({
     {
       path: '/buy_cart',
       name: 'bag',
-      component: Bag
+      component: FullBag
     },
     {
       path: '/registration',

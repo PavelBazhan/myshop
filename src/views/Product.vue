@@ -468,7 +468,6 @@ button.back {
     position: fixed;
     width: 40vw;
     top: 5vw;
-    /* right: 5vw; */
     right: -45vw;
     padding: 3vw;
     background: rgba(0, 0, 0, 0.8);
@@ -476,7 +475,7 @@ button.back {
     font-size: 1em;
     text-align: center;
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.125, 0.715, 0.175, 0.845), opacity 0.5s cubic-bezier(0.125, 0.715, 0.175, 0.845);
   }
 
   .popup.showed {
