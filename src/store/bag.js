@@ -2,7 +2,7 @@ export default {
   state: {
     bagIsActive: false,
     bagItems: [
-      {id: 11534, color: 'pink', size: 'xs', quantity: 2}
+      
     ]
   },
   mutations: {
