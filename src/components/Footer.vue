@@ -1,6 +1,6 @@
 <template>
   <footer id="footer">
-    <div class="signup_block">
+    <div class="signup_block" v-if="$route.name != 'signIn'">
       <h3>SIGN UP FOR UPDATES</h3>
       <p>Sign up for exclusive early sale access and tailored new arrivals.</p>
 
