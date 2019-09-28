@@ -2,7 +2,7 @@
   <section id="sign_form">
     <div class="sign_wrap">
 
-      <div class="create_account_block">
+      <div class="create_account_block" :class="{ active : (signFormType == 'signin') }">
         <p class="title">create account</p>
         <div class="form">
           <form>
@@ -17,8 +17,8 @@
             <input type="checkbox" name="" value="">
           </div>
           <div class="description">
-            <p>Let's get personal! We'll send you only the good stuff:</p>
-            <p>Exclusive early access to Sale, new arrivals and promotions. No nasties.</p>
+            <p>We'll send you only the good stuff:</p>
+            <p>Early access to Sale, new arrivals and promotions.</p>
           </div>
         </div>
         <p class="terms_and_privacy">
@@ -29,9 +29,12 @@
         <div class="button_block">
           <button class="sign_button">SIGN UP</button>
         </div>
+        <div class="switch_form">
+          <button @click="switchForm">I HAVE AN ACCOUNT</button>
+        </div>
       </div>
 
-      <div class="create_account_block">
+      <div class="create_account_block" :class="{ active : (signFormType != 'signin') }">
         <p class="title">log in</p>
         <div class="form">
           <form>
@@ -45,6 +48,9 @@
         <div class="button_block">
           <button class="sign_button">SIGN IN</button>
         </div>
+        <div class="switch_form">
+          <button @click="switchForm">I DON'T HAVE AN ACCOUNT</button>
+        </div>
       </div>
 
     </div>
@@ -53,7 +59,20 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      signFormType: 'signup'
+    }
+  },
+  methods: {
+    switchForm () {
+      if (this.signFormType == 'signup') {
+        this.signFormType = 'signin'
+      } else {
+        this.signFormType = 'signup'
+      }
+    }
+  }
 }
 </script>
 
@@ -155,40 +174,62 @@ export default {
     text-decoration: underline;
   }
 
-
-
-  /* <section id="sign_form">
-    <div class="sign_wrap">
-      <div class="create_account_block">
-        <p class="title">create account</p>
-        <div class="form">
-          <form>
-            <input type="text" name="first_name" value="" placeholder="First Name">
-            <input type="text" name="last_name" value="" placeholder="Last Name">
-            <input type="email" name="email" value="" placeholder="Email">
-            <input type="password" name="password" value="" placeholder="Password">
-          </form>
-        </div>
-        <div class="personal">
-          <div class="check">
-            <input type="checkbox" name="" value="">
-          </div>
-          <div class="description">
-            <p>Let's get personal! We'll send you only the good stuff:</p>
-            <p>Exclusive early access to Sale, new arrivals and promotions. No nasties.</p>
-          </div>
-        </div>
-        <p class="terms_and_privacy">
-          By signing up you agree to Terms of Service and Privacy Policy
-        </p>
-        <button class="sign_button">SIGN UP</button>
-      </div>
-    </div>
-  </section> */
+  .create_account_block .switch_form {
+    display: none;
+  }
 
   @media screen and (max-width: 600px) {
     #sign_form {
       padding-top: 15vw;
+      font-size: 3.5vw;
+      min-height: auto;
+    }
+
+    /* #sign_form {
+      padding-top: 3.9vw;
+      display: flex;
+      justify-content: center;
+      font-size: 0.8vw;
+      min-height: 80vh;
+    } */
+
+    .sign_wrap {
+      flex-direction: column;
+      width: 90%;
+      margin: 15vw 0;
+    }
+
+    .create_account_block {
+      padding: 0;
+      width: 100%;
+      display: none;
+    }
+
+    .create_account_block.active {
+      display: block;
+    }
+
+    .create_account_block:first-child {
+      border-right: none;
+    }
+
+    .create_account_block .switch_form {
+      height: 4em;
+      position: relative;
+      display: block;
+    }
+
+    .create_account_block .switch_form button {
+      height: 3em;
+      position: absolute;
+      bottom: 0;
+      background: none;
+      border: none;
+      text-decoration: underline;
+    }
+
+    .create_account_block .switch_form button:focus {
+      outline: none;
     }
   }
 </style>
