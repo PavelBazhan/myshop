@@ -20,7 +20,7 @@
           </router-link>
         </li>
 
-        <li v-for="(category, ind) in categoriesList">
+        <li v-for="category in categoriesList" :key="category">
           <router-link
             tag="a"
             :to="{ name: 'shopCateg', params: {category: category}, query: $route.query }"
@@ -51,7 +51,7 @@
           <span>Size</span>
           <ul class="check_wrap">
 
-            <li class="check" v-for="size in sizesList">
+            <li class="check" v-for="size in sizesList" :key="size">
               <label>
                 <input checked type="checkbox" name="size" :value="size" v-model="sizeChecked">
                 <span>{{ size }}</span>
@@ -83,7 +83,7 @@
         <span>SORT</span>
       </div>
       <ul class="sort_list">
-        <li v-for="sortT in sortList">
+        <li v-for="sortT in sortList" :key="sortT.value">
           <span
             :name="sortT.value"
             :class="{ active: sortType == sortT.value }"
@@ -114,10 +114,6 @@ export default {
     }
   },
   computed: {
-    nextUrl () {
-      console.log(this.sizeChecked)
-      return 'asd'
-    },
     categoriesList () {
       return this.$store.state.shop.categories
     },
@@ -202,12 +198,7 @@ export default {
         this.categoriesOpened = !this.categoriesOpened
       }
     },
-    qwer () {
-      console.log(this.$set())
-      // console.log(this.$store.state.shop.sortType)
-    },
     updateRoute () {
-      // console.log('update route')
       let newUrl = {}
       for (let key in this.$route.query) {
         newUrl[key] = this.$route.query[key]
@@ -242,7 +233,7 @@ export default {
   },
   watch: {
     '$route': {
-      handler: function(search) {
+      handler: function() {
         if (this.$route.query.size) {
           this.sizeChecked = this.$route.query.size.split(',');
         }

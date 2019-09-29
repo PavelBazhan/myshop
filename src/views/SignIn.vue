@@ -12,7 +12,7 @@
               placeholder="First Name"
               v-model="firstName"
               :class="{ 'invalid': $v.firstName.$error }"
-              @blur.lazy="$v.firstName.$touch()">
+              @blur="$v.firstName.$touch()">
               <div class="error" v-if="$v.firstName.$error && !$v.firstName.required">First name is required</div>
               <div class="error" v-if="$v.firstName.$error && !$v.firstName.alpha">Only latin characters are supported</div>
 
@@ -22,7 +22,7 @@
               placeholder="Last Name"
               v-model="lastName"
               :class="{ 'invalid': $v.lastName.$error }"
-              @blur.lazy="$v.lastName.$touch()">
+              @blur="$v.lastName.$touch()">
               <div class="error" v-if="$v.lastName.$error && !$v.lastName.required">Last name is required</div>
               <div class="error" v-if="$v.lastName.$error && !$v.lastName.alpha">Only latin characters are supported</div>
 
@@ -32,7 +32,7 @@
               placeholder="Email"
               v-model="regEmail"
               :class="{ 'invalid': $v.regEmail.$error }"
-              @blur.lazy="$v.regEmail.$touch()">
+              @blur="$v.regEmail.$touch()">
               <div class="error" v-if="$v.regEmail.$error && !$v.regEmail.required">Email is required</div>
               <div class="error" v-if="$v.regEmail.$error && !$v.regEmail.email">Invalid email address</div>
 
@@ -42,7 +42,7 @@
               placeholder="Password"
               v-model="regPassword"
               :class="{ 'invalid': $v.regPassword.$error }"
-              @blur.lazy="$v.regPassword.$touch()">
+              @blur="$v.regPassword.$touch()">
               <div class="error" v-if="$v.regPassword.$error && !$v.regPassword.required">Password is required</div>
               <div class="error" v-if="$v.regPassword.$error && !$v.regPassword.minLength">
                 The password must contain at least 6 characters
@@ -87,7 +87,7 @@
               placeholder="Email"
               v-model="loginEmail"
               :class="{ 'invalid': $v.loginEmail.$error }"
-              @blur.lazy="$v.loginEmail.$touch()">
+              @blur="$v.loginEmail.$touch()">
               <div class="error" v-if="$v.loginEmail.$error && !$v.loginEmail.required">Email is required</div>
               <div class="error" v-if="$v.loginEmail.$error && !$v.loginEmail.email">Invalid email address</div>
 
@@ -97,7 +97,7 @@
               placeholder="Password"
               v-model="loginPassword"
               :class="{ 'invalid': $v.loginPassword.$error }"
-              @blur.lazy="$v.loginPassword.$touch()">
+              @blur="$v.loginPassword.$touch()">
               <div class="error" v-if="$v.loginPassword.$error && !$v.loginPassword.required">Password is required</div>
               <div class="error" v-if="$v.loginPassword.$error && !$v.loginPassword.minLength">
                 The password must contain at least 6 characters
@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { required, email, alpha, alphaNum, minLength, maxLength } from 'vuelidate/lib/validators'
+import { required, email, alpha, alphaNum, minLength } from 'vuelidate/lib/validators'
 
 export default {
   data () {

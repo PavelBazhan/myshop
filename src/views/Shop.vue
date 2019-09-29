@@ -22,7 +22,7 @@
         </div>
 
         <div class="goods" v-if="filteredGoods.length > 0">
-          <div class="item" v-for="item in filteredGoods">
+          <div class="item" v-for="item in filteredGoods" :key="item.id">
             <router-link tag="a" :to="`/catalog/${item.category.toLowerCase()}/${item.id}`">
               <img :src="`/images/shop/${ item.imagesByColor[0][0] }`" alt="">
             </router-link>
@@ -52,12 +52,6 @@
 import Filters from '../components/Filters.vue'
 
 export default {
-  methods: {
-    qwer () {
-      console.log(this.$route.query)
-      console.log(this.$route.path)
-    }
-  },
   components: {
     appFilters: Filters
   },
@@ -74,7 +68,6 @@ export default {
         if (!this.$route.params.category) {
           return true
         }
-        let routCategory = this.$route.params.category;
         return item.category == this.$route.params.category
       })
 

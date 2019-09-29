@@ -16,9 +16,9 @@
           <p class="collection_name" v-if="product.collection != ''">{{ product.collection }}</p>
           <p class="title">{{ product.name }}</p>
           <p class="price">USD <strong>${{ product.priceDollar }}</strong></p>
-          <p class="color" @click="qwer">COLOR: <span>{{choosenColor}}</span></p>
+          <p class="color">COLOR: <span>{{choosenColor}}</span></p>
           <div class="color_panel">
-            <label v-for="color of product.colors">
+            <label v-for="color of product.colors" :key="color">
               <input type="radio" name="choosen_color" :value="color" v-model="choosenColor">
               <div class="color_block" :class="{ active: (color == choosenColor) }" :style="{ background: generalColors[color] }"></div>
             </label>
@@ -26,7 +26,7 @@
 
           <p class="size">SIZE</p>
           <div class="size_panel">
-            <label v-for="size in product.sizes">
+            <label v-for="size in product.sizes" :key="size">
               <input type="radio" name="choosen_size" :value="size" v-model="choosenSize">
               <div class="size_block" :class="{ active: (size == choosenSize)}">{{ size }}</div>
             </label>
@@ -93,18 +93,10 @@ export default {
   },
   methods: {
     switchPopup () {
-      console.log('init: ' + this.popupShowed)
       this.popupShowed = true
-      console.log('now is: ' + this.popupShowed)
-
       setTimeout(() => {
         this.popupShowed = false
-        console.log('end: ' + this.popupShowed)
       }, 1000)
-    },
-    qwer () {
-      console.log(this.$route.params.id)
-      console.log(this.$store.state.shop.goods)
     },
     backToShop () {
       this.$router.go(-1)
@@ -144,6 +136,7 @@ export default {
           return goods[i]
         }
       }
+      return null
     },
     generalColors () {
       return this.$store.state.shop.colors
@@ -154,7 +147,7 @@ export default {
   },
   watch: {
     '$route': {
-      handler: function(search) {
+      handler: function() {
         this.choosenColor = this.product.colors[0]
         this.choosenSize = this.product.sizes[0]
       },

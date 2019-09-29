@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="collection_block" v-for="block in collection_block_item">
+    <div class="collection_block" v-for="block in collection_block_item" :key="block.title">
       <div class="background" :style="{ backgroundImage: `url('./images/${block.backgroundImage}')`}">
         <div class="item">
           <h2>{{ block.title }}</h2>

@@ -9,7 +9,7 @@
         <input
           type="email"
           placeholder="Your email address"
-          @blur.lazy="$v.email.$touch()"
+          @blur="$v.email.$touch()"
           v-model="email"
           :class="{ 'error': ($v.email.$error && ($v.email.$model != '')) }"
         >

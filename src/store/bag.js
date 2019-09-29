@@ -2,7 +2,7 @@ export default {
   state: {
     bagIsActive: false,
     bagItems: [
-      
+
     ]
   },
   mutations: {
@@ -10,7 +10,6 @@ export default {
       state.bagIsActive = !state.bagIsActive
     },
     addToBag (state, item) {
-      console.log(state.bagItems)
       for (let i = 0; i < state.bagItems.length; i++) {
 
         if (

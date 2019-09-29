@@ -9,7 +9,7 @@
 
       <div class="items_block">
 
-        <div v-for="product in bagItems" class="item">
+        <div v-for="product in bagItems" class="item" :key="product.id + product.color + product.size">
           <div class="item_photo">
             <img :src="`/images/shop/${product.id}_${product.color}_0.jpg`" alt="">
           </div>
@@ -80,7 +80,6 @@ export default {
         }
       }
       this.bagItems.splice(delId, 1)
-      console.log(this.bagItems)
     }
   },
   computed: {

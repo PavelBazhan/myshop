@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 import Collections from './views/Collections.vue'
 import Shop from './views/Shop.vue'
-import NewCollection from './views/NewCollection.vue'
 import FullBag from './views/FullBag.vue'
 import SignIn from './views/SignIn.vue'
 import Product from './views/Product.vue'
@@ -36,11 +35,6 @@ export default new Router({
       component: Product
     },
     {
-      path: '/new_collection',
-      name: 'newCollection',
-      component: NewCollection
-    },
-    {
       path: '/buy_cart',
       name: 'bag',
       component: FullBag
@@ -55,7 +49,7 @@ export default new Router({
       redirect: '/'
     }
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior (to, from) {
     if (from.name == 'collections') {
       return {
         y: 0

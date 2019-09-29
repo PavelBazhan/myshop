@@ -19,7 +19,7 @@
 
       <div class="items">
 
-        <div class="item" v-for="product in bagItems">
+        <div class="item" v-for="product in bagItems" :key="product.id + product.color + product.size">
           <img
             :src="`/images/shop/${product.id}_${product.color}_0.jpg`"
             alt="">
@@ -56,12 +56,8 @@ export default {
     }
   },
   methods: {
-    qwer () {
-      console.log('click')
-    },
     switchBag () {
       this.bagIsActive = !this.bagIsActive
-      console.log(this.bagIsActive)
     },
     getProductById (id) {
       let goods = this.$store.state.shop.goods
@@ -86,7 +82,6 @@ export default {
         }
       }
       this.bagItems.splice(delId, 1)
-      console.log(this.bagItems)
     }
   },
   computed: {

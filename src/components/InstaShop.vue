@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="item_wrap">
-          <div class="item" v-for="(galleryItem, ind) of instashop_block" v-if="ind && ind<=4">
+          <div class="item" v-for="(galleryItem, ind) of instashop_block" v-if="ind && ind<=4" :key="galleryItem.pathPic">
             <a
               :href="`https://www.instagram.com/${galleryItem.title.slice(1)}`"
               target="_blank"

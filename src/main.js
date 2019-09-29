@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(Vuelidate)
 
-var vm = new Vue({
+new Vue({
   router,
   store,
   render: h => h(App)
