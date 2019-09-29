@@ -6,7 +6,16 @@
 
       <form>
         <input type="submit" value="JOIN">
-        <input type="email" placeholder="Your email address">
+        <input
+          type="email"
+          placeholder="Your email address"
+          @blur.lazy="$v.email.$touch()"
+          v-model="email"
+          :class="{ 'error': ($v.email.$error && ($v.email.$model != '')) }"
+        >
+        <div class="error_block">
+          Invalid email address
+        </div>
       </form>
 
 
@@ -87,18 +96,27 @@
 </template>
 
 <script>
+import { required, email } from 'vuelidate/lib/validators'
+
 export default {
   data () {
     return {
       customerServiceIsOpened: false,
       infoIsOpened: false,
       followUsIsOpened: false,
-      contactUsIsOpened: false
+      contactUsIsOpened: false,
+      email: ''
     }
   },
   computed: {
     customer_service () {
       return this.$store.footer.customer_service
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email
     }
   }
 }
@@ -140,6 +158,26 @@ export default {
   border-top: none;
   border-right: none;
   border-bottom: 1px solid #D8D8D8;
+}
+
+.signup_block input[type=email].error {
+  border-bottom: 1px solid #D8000C;
+}
+
+.signup_block input[type=email] + .error_block {
+  display: none;
+  /* background: #FFD2D2; */
+  width: 100%;
+  height: 1.3em;
+  font-size: 0.8em;
+  line-height: 1.3em;
+  color: #D8000C;
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+.signup_block input[type=email].error + .error_block {
+  display: block;
 }
 
 .signup_block input[type=text]:focus {
@@ -208,6 +246,12 @@ export default {
 
   .signup_block input[type=email] {
     width: 88vw;
+  }
+
+  .signup_block input[type=email] + .error_block {
+    height: 1.6em;
+    font-size: 1em;
+    line-height: 1.6em;
   }
 
   .links_block {

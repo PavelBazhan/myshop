@@ -6,10 +6,50 @@
         <p class="title">create account</p>
         <div class="form">
           <form>
-            <input type="text" name="first_name" value="" placeholder="First Name">
-            <input type="text" name="last_name" value="" placeholder="Last Name">
-            <input type="email" name="email" value="" placeholder="Email">
-            <input type="password" name="password" value="" placeholder="Password">
+            <input
+              type="text"
+              name="first_name"
+              placeholder="First Name"
+              v-model="firstName"
+              :class="{ 'invalid': $v.firstName.$error }"
+              @blur.lazy="$v.firstName.$touch()">
+              <div class="error" v-if="$v.firstName.$error && !$v.firstName.required">First name is required</div>
+              <div class="error" v-if="$v.firstName.$error && !$v.firstName.alpha">Only latin characters are supported</div>
+
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Last Name"
+              v-model="lastName"
+              :class="{ 'invalid': $v.lastName.$error }"
+              @blur.lazy="$v.lastName.$touch()">
+              <div class="error" v-if="$v.lastName.$error && !$v.lastName.required">Last name is required</div>
+              <div class="error" v-if="$v.lastName.$error && !$v.lastName.alpha">Only latin characters are supported</div>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              v-model="regEmail"
+              :class="{ 'invalid': $v.regEmail.$error }"
+              @blur.lazy="$v.regEmail.$touch()">
+              <div class="error" v-if="$v.regEmail.$error && !$v.regEmail.required">Email is required</div>
+              <div class="error" v-if="$v.regEmail.$error && !$v.regEmail.email">Invalid email address</div>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              v-model="regPassword"
+              :class="{ 'invalid': $v.regPassword.$error }"
+              @blur.lazy="$v.regPassword.$touch()">
+              <div class="error" v-if="$v.regPassword.$error && !$v.regPassword.required">Password is required</div>
+              <div class="error" v-if="$v.regPassword.$error && !$v.regPassword.minLength">
+                The password must contain at least 6 characters
+              </div>
+              <div class="error" v-if="$v.regPassword.$error && !$v.regPassword.alphaNum && $v.regPassword.minLength">
+                Only latin characters and numbers are supported
+              </div>
           </form>
         </div>
         <div class="personal">
@@ -27,7 +67,10 @@
           <a href="#">Privacy Policy</a>
         </p>
         <div class="button_block">
-          <button class="sign_button">SIGN UP</button>
+          <button
+            class="sign_button"
+            :disabled="!regFormIsValid">
+            SIGN UP</button>
         </div>
         <div class="switch_form">
           <button @click="switchForm">I HAVE AN ACCOUNT</button>
@@ -38,30 +81,75 @@
         <p class="title">log in</p>
         <div class="form">
           <form>
-            <input type="email" name="email" value="" placeholder="Email">
-            <input type="password" name="password" value="" placeholder="Password">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              v-model="loginEmail"
+              :class="{ 'invalid': $v.loginEmail.$error }"
+              @blur.lazy="$v.loginEmail.$touch()">
+              <div class="error" v-if="$v.loginEmail.$error && !$v.loginEmail.required">Email is required</div>
+              <div class="error" v-if="$v.loginEmail.$error && !$v.loginEmail.email">Invalid email address</div>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              v-model="loginPassword"
+              :class="{ 'invalid': $v.loginPassword.$error }"
+              @blur.lazy="$v.loginPassword.$touch()">
+              <div class="error" v-if="$v.loginPassword.$error && !$v.loginPassword.required">Password is required</div>
+              <div class="error" v-if="$v.loginPassword.$error && !$v.loginPassword.minLength">
+                The password must contain at least 6 characters
+              </div>
+              <div class="error" v-if="$v.loginPassword.$error && !$v.loginPassword.alphaNum && $v.loginPassword.minLength">
+                Only latin characters and numbers are supported
+              </div>
           </form>
         </div>
         <p class="forgotten">
           <a href="#">Forgotten your password?</a>
         </p>
         <div class="button_block">
-          <button class="sign_button">SIGN IN</button>
+          <button
+            class="sign_button"
+            :disabled="!loginFormIsValid">
+            SIGN IN</button>
         </div>
         <div class="switch_form">
           <button @click="switchForm">I DON'T HAVE AN ACCOUNT</button>
         </div>
       </div>
 
+
     </div>
   </section>
 </template>
 
 <script>
+import { required, email, alpha, alphaNum, minLength, maxLength } from 'vuelidate/lib/validators'
+
 export default {
   data () {
     return {
-      signFormType: 'signup'
+      signFormType: 'signup',
+
+      firstName: '',
+      lastName: '',
+      regEmail: '',
+      regPassword: '',
+      loginEmail: '',
+      loginPassword: ''
+    }
+  },
+  computed: {
+    regFormIsValid () {
+      let out = !this.$v.firstName.$invalid && !this.$v.lastName.$invalid && !this.$v.regEmail.$invalid && !this.$v.regPassword.$invalid
+      return out
+    },
+    loginFormIsValid () {
+      let out = !this.$v.loginEmail.$invalid && !this.$v.loginPassword.$invalid
+      return out
     }
   },
   methods: {
@@ -71,6 +159,34 @@ export default {
       } else {
         this.signFormType = 'signup'
       }
+    }
+  },
+  validations: {
+    firstName: {
+      required,
+      alpha
+    },
+    lastName: {
+      required,
+      alpha
+    },
+    regEmail: {
+      required,
+      email
+    },
+    regPassword: {
+      required,
+      alphaNum,
+      minLength: minLength(6)
+    },
+    loginEmail: {
+      required,
+      email
+    },
+    loginPassword: {
+      required,
+      alphaNum,
+      minLength: minLength(6)
     }
   }
 }
@@ -125,6 +241,20 @@ export default {
     border-bottom: 1px solid #D8D8D8;
   }
 
+  .create_account_block div.form form input.invalid {
+    border-bottom: 1px solid #D8000C;
+  }
+
+  .create_account_block div.form form .error {
+    text-align: right;
+    margin-top: -1em;
+    color: #D8000C;
+  }
+
+  .create_account_block div.form form .error:last-child {
+    margin-bottom: 1em;
+  }
+
   .create_account_block .personal {
     width: 100%;
     display: flex;
@@ -169,6 +299,11 @@ export default {
     border: none;
   }
 
+  .create_account_block .button_block .sign_button[disabled] {
+    background: #aaa;
+    color: #ddd;
+  }
+
   .create_account_block .forgotten a {
     color: black;
     text-decoration: underline;
@@ -184,14 +319,6 @@ export default {
       font-size: 3.5vw;
       min-height: auto;
     }
-
-    /* #sign_form {
-      padding-top: 3.9vw;
-      display: flex;
-      justify-content: center;
-      font-size: 0.8vw;
-      min-height: 80vh;
-    } */
 
     .sign_wrap {
       flex-direction: column;
