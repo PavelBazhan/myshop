@@ -87,8 +87,9 @@ export default {
 }
 </script>
 
-<style scoped>
-  section#collections {
+<style lang="scss" scoped>
+  @import "../scss_styles/collections.scss";
+  /* section#collections {
     font-family: 'Muli', sans-serif;
   }
 
@@ -302,5 +303,5 @@ export default {
       margin-bottom: 5vw;
     }
 
-  }
+  } */
 </style>
